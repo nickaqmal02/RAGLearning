@@ -1,0 +1,183 @@
+---
+title: "FROM SCRATCH 1 TO 4"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    
+  pdf:
+    theme: default
+---
+
+
+## Data Ingestion
+
+> We have several loaders in LangChain
+
+
+> Retrieval Augmented Generation: Process of optimizing LLM output
+>
+> so it will refer to authorized knowledge base outside its training data source
+>
+>
+
+
+```{python}
+#| echo: true
+from langchain_core.documents import Document
+
+```
+
+> getting the query from user and do embedding operation on it and refers
+> out vector db 
+> RETRIEVAL PIPELINE
+>
+>
+> we have much more type of RAG so like Agentic RAG
+>
+> Augmentation means we give context to llm and generate the output
+> **Data Ingestion and Data Parsing**
+>
+> 
+>
+>
+
+
+
+```{python}
+# 
+
+
+```
+
+```{mermaid}
+flowchart LR
+    DataIngestion e1@==> Chunk
+    DataIngestion e2@==> Chunk2 
+    DataIngestion e1@==> Chunk3
+    DataIngestion e2@==> Chunk4
+```
+
+*so for every chunk we apply embeddings and finally store it into our final vector db*
+
+* **embedding**: convert text to vectors
+
+```{python}
+### document structure
+from langchain_core.documents import Document
+# if we wanna improve our RAG we shall use metadata
+doc=Document(
+    page_content="this is the main text content I am using to create RAG",
+    metadata={
+        "source": "example.txt",
+        "pages":1,
+        "author":"Khrisk Naik",
+        "date_created": "2025-01-07",
+    }
+)
+
+doc
+
+
+
+```
+
+```{python}
+# create a simple txt file
+import os
+
+os.makedirs("./data/text_files", exist_ok=True)
+# using one dot will create this folder in current pwd
+
+```
+
+```{python}
+
+sample_texts={
+    "./data/text_files/python_intro.txt":"""Python Programming Introductio 
+
+Python is a high level, interpreted programming languange known for its simplicity and readability.
+Created by Guido van Rosum and first released in 1991, Python has become one of the most popular 
+Programming languanges in the world.
+
+Key Features:
+- easy to learn and use 
+- extensive standard Library
+- 
+
+python also widely used in web development, data science, artificial intelligence, and automation.
+
+""",
+    "./data/text_files/machine_learning.txt": """Machine Learning Basics
+
+Machine learning is a subset of artificial intelligence that enables system to learn and improve from experience without being explicitly programmed. It focuses on developing computer programs that can access data and use it to learn for themselves.
+
+Types of Machine Learning:
+1. Supervised Learning: Learning with labeled data
+2. Unsupervised Learning: Finding patterns in unlabeled data
+3. Reinforcement Learning: Learning through rewards and penalties
+
+."""
+}
+# what does 'w' means here ??
+# w - means - write
+# r - means - Read
+# a append
+# x creates new files
+# w+ write + read
+# a+ append + read 
+
+for filepath, content in sample_texts.items():
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write(content)
+
+print("😀 Sample text files is created")
+
+```
+
+```{python}
+#| label: Text Loader
+from langchain_community.document_loaders import TextLoader
+
+# declaring the loader this was the pythonic ways
+loader=TextLoader("./data/text_files/python_intro.txt", encoding="utf-8")
+document= loader.load()
+print(document)
+
+```
+
+```{python}
+#| label: Directory Loader
+from langchain_community.document_loaders import DirectoryLoader
+
+## load all the text files from the Directory
+dir_loader=DirectoryLoader(
+    "./data/text_files",
+    glob="**/*.txt", ## Pattern to match files
+    loader_cls= TextLoader, ## loader class to use 
+    loader_kwargs={'encoding': 'utf-8'},
+    show_progress=True
+
+)
+
+documents=dir_loader.load()
+documents
+
+```
+
+```{python}
+#| label: PDF loader
+
+from langchain_community.document_loaders import PyMuPDFLoader
+
+## load all the text files from the Directory
+dir_loader=DirectoryLoader(
+    "./data/pdf",
+    glob="**/*.txt", ## Pattern to match files
+    loader_cls= TextLoader, ## loader class to use 
+    loader_kwargs={'encoding': 'utf-8'},
+    show_progress=True
+)
+
+
+```

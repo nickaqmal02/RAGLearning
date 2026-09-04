@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "R.html",
+    "href": "R.html",
+    "title": "R",
+    "section": "",
+    "text": "print(\"hello\")\n\nhello\n\n\n\nRetrieve: Fetch relevant documents from a vector"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "FROM SCRATCH 1 TO 4",
+    "section": "",
+    "text": "We have several loaders in LangChain\n\n\nRetrieval Augmented Generation: Process of optimizing LLM output\nso it will refer to authorized knowledge base outside its training data source\n\n\nfrom langchain_core.documents import Document\n\n\ngetting the query from user and do embedding operation on it and refers out vector db RETRIEVAL PIPELINE\nwe have much more type of RAG so like Agentic RAG\nAugmentation means we give context to llm and generate the output Data Ingestion and Data Parsing\n\n\n# \n\n\n\n\n\n\nflowchart LR\n    DataIngestion e1@==&gt; Chunk\n    DataIngestion e2@==&gt; Chunk2 \n    DataIngestion e1@==&gt; Chunk3\n    DataIngestion e2@==&gt; Chunk4\n\n\n\n\n\n\nso for every chunk we apply embeddings and finally store it into our final vector db\n\nembedding: convert text to vectors\n\n\n### document structure\nfrom langchain_core.documents import Document\n# if we wanna improve our RAG we shall use metadata\ndoc=Document(\n    page_content=\"this is the main text content I am using to create RAG\",\n    metadata={\n        \"source\": \"example.txt\",\n        \"pages\":1,\n        \"author\":\"Khrisk Naik\",\n        \"date_created\": \"2025-01-07\",\n    }\n)\n\ndoc\n\nDocument(metadata={'source': 'example.txt', 'pages': 1, 'author': 'Khrisk Naik', 'date_created': '2025-01-07'}, page_content='this is the main text content I am using to create RAG')\n\n\n\n# create a simple txt file\nimport os\n\nos.makedirs(\"./data/text_files\", exist_ok=True)\n# using one dot will create this folder in current pwd\n\n\nsample_texts={\n    \"./data/text_files/python_intro.txt\":\"\"\"Python Programming Introductio \n\nPython is a high level, interpreted programming languange known for its simplicity and readability.\nCreated by Guido van Rosum and first released in 1991, Python has become one of the most popular \nProgramming languanges in the world.\n\nKey Features:\n- easy to learn and use \n- extensive standard Library\n- \n\npython also widely used in web development, data science, artificial intelligence, and automation.\n\n\"\"\",\n    \"./data/text_files/machine_learning.txt\": \"\"\"Machine Learning Basics\n\nMachine learning is a subset of artificial intelligence that enables system to learn and improve from experience without being explicitly programmed. It focuses on developing computer programs that can access data and use it to learn for themselves.\n\nTypes of Machine Learning:\n1. Supervised Learning: Learning with labeled data\n2. Unsupervised Learning: Finding patterns in unlabeled data\n3. Reinforcement Learning: Learning through rewards and penalties\n\n.\"\"\"\n}\n# what does 'w' means here ??\n# w - means - write\n# r - means - Read\n# a append\n# x creates new files\n# w+ write + read\n# a+ append + read \n\nfor filepath, content in sample_texts.items():\n    with open(filepath, 'w', encoding='utf-8') as f:\n        f.write(content)\n\nprint(\"😀 Sample text files is created\")\n\n😀 Sample text files is created\n\n\n\nfrom langchain_community.document_loaders import TextLoader\n\n# declaring the loader this was the pythonic ways\nloader=TextLoader(\"./data/text_files/python_intro.txt\", encoding=\"utf-8\")\ndocument= loader.load()\nprint(document)\n\n[Document(metadata={'source': './data/text_files/python_intro.txt'}, page_content='Python Programming Introductio \\n\\nPython is a high level, interpreted programming languange known for its simplicity and readability.\\nCreated by Guido van Rosum and first released in 1991, Python has become one of the most popular \\nProgramming languanges in the world.\\n\\nKey Features:\\n- easy to learn and use \\n- extensive standard Library\\n- \\n\\npython also widely used in web development, data science, artificial intelligence, and automation.\\n\\n')]\n\n\n::: {#cell-Directory Loader .cell execution_count=7}\nfrom langchain_community.document_loaders import DirectoryLoader\n\n## load all the text files from the Directory\ndir_loader=DirectoryLoader(\n    \"./data/text_files\",\n    glob=\"**/*.txt\", ## Pattern to match files\n    loader_cls= TextLoader, ## loader class to use \n    loader_kwargs={'encoding': 'utf-8'},\n    show_progress=True\n\n)\n\ndocuments=dir_loader.load()\ndocuments\n\n\n  0%|          | 0/2 [00:00&lt;?, ?it/s]\n100%|██████████| 2/2 [00:00&lt;00:00, 2736.01it/s]\n\n\n[Document(metadata={'source': 'data/text_files/python_intro.txt'}, page_content='Python Programming Introductio \\n\\nPython is a high level, interpreted programming languange known for its simplicity and readability.\\nCreated by Guido van Rosum and first released in 1991, Python has become one of the most popular \\nProgramming languanges in the world.\\n\\nKey Features:\\n- easy to learn and use \\n- extensive standard Library\\n- \\n\\npython also widely used in web development, data science, artificial intelligence, and automation.\\n\\n'),\n Document(metadata={'source': 'data/text_files/machine_learning.txt'}, page_content='Machine Learning Basics\\n\\nMachine learning is a subset of artificial intelligence that enables system to learn and improve from experience without being explicitly programmed. It focuses on developing computer programs that can access data and use it to learn for themselves.\\n\\nTypes of Machine Learning:\\n1. Supervised Learning: Learning with labeled data\\n2. Unsupervised Learning: Finding patterns in unlabeled data\\n3. Reinforcement Learning: Learning through rewards and penalties\\n\\n.')]\n\n:::\n\nfrom langchain_community.document_loaders import PyMuPDFLoader\n\n## load all the text files from the Directory\ndir_loader=DirectoryLoader(\n    \"./data/pdf\",\n    glob=\"**/*.txt\", ## Pattern to match files\n    loader_cls= TextLoader, ## loader class to use \n    loader_kwargs={'encoding': 'utf-8'},\n    show_progress=True\n)"
+  },
+  {
+    "objectID": "index.html#data-ingestion",
+    "href": "index.html#data-ingestion",
+    "title": "FROM SCRATCH 1 TO 4",
+    "section": "",
+    "text": "We have several loaders in LangChain\n\n\nRetrieval Augmented Generation: Process of optimizing LLM output\nso it will refer to authorized knowledge base outside its training data source\n\n\nfrom langchain_core.documents import Document\n\n\ngetting the query from user and do embedding operation on it and refers out vector db RETRIEVAL PIPELINE\nwe have much more type of RAG so like Agentic RAG\nAugmentation means we give context to llm and generate the output Data Ingestion and Data Parsing\n\n\n# \n\n\n\n\n\n\nflowchart LR\n    DataIngestion e1@==&gt; Chunk\n    DataIngestion e2@==&gt; Chunk2 \n    DataIngestion e1@==&gt; Chunk3\n    DataIngestion e2@==&gt; Chunk4\n\n\n\n\n\n\nso for every chunk we apply embeddings and finally store it into our final vector db\n\nembedding: convert text to vectors\n\n\n### document structure\nfrom langchain_core.documents import Document\n# if we wanna improve our RAG we shall use metadata\ndoc=Document(\n    page_content=\"this is the main text content I am using to create RAG\",\n    metadata={\n        \"source\": \"example.txt\",\n        \"pages\":1,\n        \"author\":\"Khrisk Naik\",\n        \"date_created\": \"2025-01-07\",\n    }\n)\n\ndoc\n\nDocument(metadata={'source': 'example.txt', 'pages': 1, 'author': 'Khrisk Naik', 'date_created': '2025-01-07'}, page_content='this is the main text content I am using to create RAG')\n\n\n\n# create a simple txt file\nimport os\n\nos.makedirs(\"./data/text_files\", exist_ok=True)\n# using one dot will create this folder in current pwd\n\n\nsample_texts={\n    \"./data/text_files/python_intro.txt\":\"\"\"Python Programming Introductio \n\nPython is a high level, interpreted programming languange known for its simplicity and readability.\nCreated by Guido van Rosum and first released in 1991, Python has become one of the most popular \nProgramming languanges in the world.\n\nKey Features:\n- easy to learn and use \n- extensive standard Library\n- \n\npython also widely used in web development, data science, artificial intelligence, and automation.\n\n\"\"\",\n    \"./data/text_files/machine_learning.txt\": \"\"\"Machine Learning Basics\n\nMachine learning is a subset of artificial intelligence that enables system to learn and improve from experience without being explicitly programmed. It focuses on developing computer programs that can access data and use it to learn for themselves.\n\nTypes of Machine Learning:\n1. Supervised Learning: Learning with labeled data\n2. Unsupervised Learning: Finding patterns in unlabeled data\n3. Reinforcement Learning: Learning through rewards and penalties\n\n.\"\"\"\n}\n# what does 'w' means here ??\n# w - means - write\n# r - means - Read\n# a append\n# x creates new files\n# w+ write + read\n# a+ append + read \n\nfor filepath, content in sample_texts.items():\n    with open(filepath, 'w', encoding='utf-8') as f:\n        f.write(content)\n\nprint(\"😀 Sample text files is created\")\n\n😀 Sample text files is created\n\n\n\nfrom langchain_community.document_loaders import TextLoader\n\n# declaring the loader this was the pythonic ways\nloader=TextLoader(\"./data/text_files/python_intro.txt\", encoding=\"utf-8\")\ndocument= loader.load()\nprint(document)\n\n[Document(metadata={'source': './data/text_files/python_intro.txt'}, page_content='Python Programming Introductio \\n\\nPython is a high level, interpreted programming languange known for its simplicity and readability.\\nCreated by Guido van Rosum and first released in 1991, Python has become one of the most popular \\nProgramming languanges in the world.\\n\\nKey Features:\\n- easy to learn and use \\n- extensive standard Library\\n- \\n\\npython also widely used in web development, data science, artificial intelligence, and automation.\\n\\n')]\n\n\n::: {#cell-Directory Loader .cell execution_count=7}\nfrom langchain_community.document_loaders import DirectoryLoader\n\n## load all the text files from the Directory\ndir_loader=DirectoryLoader(\n    \"./data/text_files\",\n    glob=\"**/*.txt\", ## Pattern to match files\n    loader_cls= TextLoader, ## loader class to use \n    loader_kwargs={'encoding': 'utf-8'},\n    show_progress=True\n\n)\n\ndocuments=dir_loader.load()\ndocuments\n\n\n  0%|          | 0/2 [00:00&lt;?, ?it/s]\n100%|██████████| 2/2 [00:00&lt;00:00, 2736.01it/s]\n\n\n[Document(metadata={'source': 'data/text_files/python_intro.txt'}, page_content='Python Programming Introductio \\n\\nPython is a high level, interpreted programming languange known for its simplicity and readability.\\nCreated by Guido van Rosum and first released in 1991, Python has become one of the most popular \\nProgramming languanges in the world.\\n\\nKey Features:\\n- easy to learn and use \\n- extensive standard Library\\n- \\n\\npython also widely used in web development, data science, artificial intelligence, and automation.\\n\\n'),\n Document(metadata={'source': 'data/text_files/machine_learning.txt'}, page_content='Machine Learning Basics\\n\\nMachine learning is a subset of artificial intelligence that enables system to learn and improve from experience without being explicitly programmed. It focuses on developing computer programs that can access data and use it to learn for themselves.\\n\\nTypes of Machine Learning:\\n1. Supervised Learning: Learning with labeled data\\n2. Unsupervised Learning: Finding patterns in unlabeled data\\n3. Reinforcement Learning: Learning through rewards and penalties\\n\\n.')]\n\n:::\n\nfrom langchain_community.document_loaders import PyMuPDFLoader\n\n## load all the text files from the Directory\ndir_loader=DirectoryLoader(\n    \"./data/pdf\",\n    glob=\"**/*.txt\", ## Pattern to match files\n    loader_cls= TextLoader, ## loader class to use \n    loader_kwargs={'encoding': 'utf-8'},\n    show_progress=True\n)"
+  },
+  {
+    "objectID": "quarto-revealjs-animate/example.html#animated-heart",
+    "href": "quarto-revealjs-animate/example.html#animated-heart",
+    "title": "Animations with Quarto/Reveal.js and SVG.js",
+    "section": "Animated Heart",
+    "text": "Animated Heart"
+  },
+  {
+    "objectID": "quarto-revealjs-animate/example.html#monty-hall-problem",
+    "href": "quarto-revealjs-animate/example.html#monty-hall-problem",
+    "title": "Animations with Quarto/Reveal.js and SVG.js",
+    "section": "Monty Hall Problem",
+    "text": "Monty Hall Problem"
+  },
+  {
+    "objectID": "quarto-revealjs-animate/example.html#linear-program",
+    "href": "quarto-revealjs-animate/example.html#linear-program",
+    "title": "Animations with Quarto/Reveal.js and SVG.js",
+    "section": "Linear Program",
+    "text": "Linear Program"
+  },
+  {
+    "objectID": "quarto-revealjs-animate/example.html#graphical-solution-procedure",
+    "href": "quarto-revealjs-animate/example.html#graphical-solution-procedure",
+    "title": "Animations with Quarto/Reveal.js and SVG.js",
+    "section": "Graphical solution procedure",
+    "text": "Graphical solution procedure"
+  },
+  {
+    "objectID": "quarto-revealjs-animate/example.html#multiple-corner-point-solutions",
+    "href": "quarto-revealjs-animate/example.html#multiple-corner-point-solutions",
+    "title": "Animations with Quarto/Reveal.js and SVG.js",
+    "section": "Multiple corner point solutions",
+    "text": "Multiple corner point solutions"
+  },
+  {
+    "objectID": "quarto-revealjs-animate/example.html#simplex-algorithm",
+    "href": "quarto-revealjs-animate/example.html#simplex-algorithm",
+    "title": "Animations with Quarto/Reveal.js and SVG.js",
+    "section": "Simplex algorithm",
+    "text": "Simplex algorithm"
+  },
+  {
+    "objectID": "quarto-revealjs-animate/example.html#linear-relaxation-and-rounding",
+    "href": "quarto-revealjs-animate/example.html#linear-relaxation-and-rounding",
+    "title": "Animations with Quarto/Reveal.js and SVG.js",
+    "section": "Linear relaxation and rounding",
+    "text": "Linear relaxation and rounding"
+  },
+  {
+    "objectID": "quarto-revealjs-animate/example.html#integer-enumeration",
+    "href": "quarto-revealjs-animate/example.html#integer-enumeration",
+    "title": "Animations with Quarto/Reveal.js and SVG.js",
+    "section": "Integer enumeration",
+    "text": "Integer enumeration"
+  },
+  {
+    "objectID": "quarto-revealjs-animate/example.html#branch-and-bound",
+    "href": "quarto-revealjs-animate/example.html#branch-and-bound",
+    "title": "Animations with Quarto/Reveal.js and SVG.js",
+    "section": "Branch and bound",
+    "text": "Branch and bound\n\nSolution: \\((x,y) = (3.8,3)\\) Branch \\(x \\geq 4\\) Branch \\(x \\geq 4\\) ⟶ \\((x,y) = (4,2.9)\\) Branch \\(x \\geq 4\\), \\(y \\geq 3\\) Branch \\(x \\geq 4\\), \\(y \\geq 3\\) ⟶ infeasible Discard branch: \\(x \\geq 4\\), \\(y \\geq 3\\) Branch \\(x \\geq 4\\), \\(y \\leq 2\\) Branch \\(x \\geq 4\\), \\(y \\leq 2\\) ⟶ \\((x,y) = (4,2)\\) \\((x,y) = (4,2)\\) is an integer solution Branch \\(x \\leq 3\\) Branch \\(x \\leq 3\\) ⟶ \\((x,y) = (3,2.6)\\) Branch \\(x \\leq 3\\), \\(y \\geq 3\\) Branch \\(x \\leq 3\\), \\(y \\geq 3\\) ⟶ infeasible Discard branch: \\(x \\leq 3\\), \\(y \\geq 3\\) Branch \\(x \\leq 3\\), \\(y \\leq 2\\) Branch \\(x \\leq 3\\), \\(y \\leq 2\\) ⟶ \\((x,y) = (1.8,2)\\) Branch \\(x \\leq 3\\), \\(y \\leq 2\\), \\(x \\geq 2\\) Branch \\(x \\leq 3\\), \\(y \\leq 2\\), \\(x \\geq 2\\)⟶ \\((x,y) = (2,2)\\) \\((x,y) = (2,2)\\) is an integer solution Branch \\(x \\leq 3\\), \\(y \\geq 3\\), \\(x \\leq 1\\) Branch \\(x \\leq 3\\), \\(y \\geq 3\\), \\(x \\leq 1\\) ⟶ \\((x,y) = (1,1.6)\\) \\((x,y) = (1,1.6)\\) is worse than best integer solution All branches solved, \\((x,y) = (2,2)\\) is optimal"
+  },
+  {
+    "objectID": "quarto-revealjs-animate/example.html#big-m-constraint",
+    "href": "quarto-revealjs-animate/example.html#big-m-constraint",
+    "title": "Animations with Quarto/Reveal.js and SVG.js",
+    "section": "Big-M constraint",
+    "text": "Big-M constraint\n\n\\(y \\leq 1 + M(1-z)\\) with \\(z=1\\)"
+  },
+  {
+    "objectID": "quarto-revealjs-animate/example.html#big-m-constraint-1",
+    "href": "quarto-revealjs-animate/example.html#big-m-constraint-1",
+    "title": "Animations with Quarto/Reveal.js and SVG.js",
+    "section": "Big-M constraint",
+    "text": "Big-M constraint\n\n\\(y \\leq 1 + M(1-z)\\) with \\(z=0\\)  and sufficiently large \\(M\\)"
+  }
+]
