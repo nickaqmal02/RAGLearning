@@ -203,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Retrieval Augmented Generation: Process of optimizing LLM output</p>
 <p>so it will refer to authorized knowledge base outside its training data source</p>
 </blockquote>
-<div id="fd6fe327" class="cell" data-execution_count="1">
+<div id="32f541fe" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> langchain_core.documents <span class="im">import</span> Document</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <blockquote class="blockquote">
@@ -211,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>we have much more type of RAG so like Agentic RAG</p>
 <p>Augmentation means we give context to llm and generate the output <strong>Data Ingestion and Data Parsing</strong></p>
 </blockquote>
-<div id="a43c8ab8" class="cell" data-execution_count="2">
+<div id="e30eeea6" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-layout-align="default">
@@ -231,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><em>so for every chunk we apply embeddings and finally store it into our final vector db </em> <strong>embedding</strong>: convert text to vectors</p>
-<div id="972d1e6a" class="cell" data-execution_count="3">
+<div id="fa6c187b" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">### document structure</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> langchain_core.documents <span class="im">import</span> Document</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># if we wanna improve our RAG we shall use metadata</span></span>
@@ -246,18 +246,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>doc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="148">
+<div class="cell-output cell-output-display" data-execution_count="55">
 <pre><code>Document(metadata={'source': 'example.txt', 'pages': 1, 'author': 'Khrisk Naik', 'date_created': '2025-01-07'}, page_content='this is the main text content I am using to create RAG')</code></pre>
 </div>
 </div>
-<div id="3726d618" class="cell" data-execution_count="4">
+<div id="3d5e92af" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a simple txt file</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>os.makedirs(<span class="st">"./data/text_files"</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># using one dot will create this folder in current pwd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="4d18eab2" class="cell" data-execution_count="5">
+<div id="d4b9aa76" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sample_texts<span class="op">=</span>{</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"./data/text_files/python_intro.txt"</span>:<span class="st">"""Python Programming Introductio </span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -330,9 +330,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stderr">
 <pre><code>
   0%|          | 0/2 [00:00&lt;?, ?it/s]
-100%|██████████| 2/2 [00:00&lt;00:00, 3938.31it/s]</code></pre>
+100%|██████████| 2/2 [00:00&lt;00:00, 2717.40it/s]</code></pre>
 </div>
-<div id="directory-loader" class="cell-output cell-output-display" data-execution_count="152">
+<div id="directory-loader" class="cell-output cell-output-display" data-execution_count="59">
 <pre><code>[Document(metadata={'source': 'data/text_files/python_intro.txt'}, page_content='Python Programming Introductio \n\nPython is a high level, interpreted programming languange known for its simplicity and readability.\nCreated by Guido van Rosum and first released in 1991, Python has become one of the most popular \nProgramming languanges in the world.\n\nKey Features:\n- easy to learn and use \n- extensive standard Library\n- \n\npython also widely used in web development, data science, artificial intelligence, and automation.\n\n'),
  Document(metadata={'source': 'data/text_files/machine_learning.txt'}, page_content='Machine Learning Basics\n\nMachine learning is a subset of artificial intelligence that enables system to learn and improve from experience without being explicitly programmed. It focuses on developing computer programs that can access data and use it to learn for themselves.\n\nTypes of Machine Learning:\n1. Supervised Learning: Learning with labeled data\n2. Unsupervised Learning: Finding patterns in unlabeled data\n3. Reinforcement Learning: Learning through rewards and penalties\n\n.')]</code></pre>
 </div>
@@ -353,9 +353,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stderr">
 <pre><code>
   0%|          | 0/2 [00:00&lt;?, ?it/s]
-100%|██████████| 2/2 [00:00&lt;00:00, 77.38it/s]</code></pre>
+100%|██████████| 2/2 [00:00&lt;00:00, 80.19it/s]</code></pre>
 </div>
-<div id="pdf-loader" class="cell-output cell-output-display" data-execution_count="153">
+<div id="pdf-loader" class="cell-output cell-output-display" data-execution_count="60">
 <pre><code>[Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 0}, page_content=''),
  Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 1}, page_content=''),
  Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 2}, page_content=''),
@@ -389,7 +389,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="rag-pipelines-data-ingestion-to-vector-db-pipeline" class="level1">
 <h1><strong>RAG PIPELINES DATA INGESTION TO VECTOR DB PIPELINE</strong></h1>
-<div id="54c63d9f" class="cell" data-execution_count="9">
+<div id="fb19aae7" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> langchain_community.document_loaders <span class="im">import</span> PyPDFLoader, PyMuPDFLoader</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> langchain_text_splitters <span class="im">import</span> RecursiveCharacterTextSplitter</span>
@@ -441,7 +441,7 @@ Processing: ManagingCrime.pdf
 
 Total documents loaded: 22</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="154">
+<div class="cell-output cell-output-display" data-execution_count="61">
 <pre><code>[Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 0, 'source_file': 'OrganizedCrime.pdf', 'file_type': 'pdf'}, page_content=''),
  Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 1, 'source_file': 'OrganizedCrime.pdf', 'file_type': 'pdf'}, page_content=''),
  Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 2, 'source_file': 'OrganizedCrime.pdf', 'file_type': 'pdf'}, page_content=''),
@@ -496,7 +496,7 @@ Example chunk:
 Content: Organized Crime and Cyberterrorism...
 Metadata: {'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813121939Z00'00'", 'source': 'data/pdf/ManagingCrime.pdf', 'file_path': 'data/pdf/ManagingCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.4', 'title': '04 Organized Crime and CyberTerrorrism', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813121939Z00'00'", 'trapped': '', 'modDate': "D:20260813121939Z00'00'", 'creationDate': "D:20260813121939Z00'00'", 'page': 0, 'source_file': 'ManagingCrime.pdf', 'file_type': 'pdf'}</code></pre>
 </div>
-<div id="calling-the-split-method" class="cell-output cell-output-display" data-execution_count="156">
+<div id="calling-the-split-method" class="cell-output cell-output-display" data-execution_count="63">
 <pre><code>[Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813121939Z00'00'", 'source': 'data/pdf/ManagingCrime.pdf', 'file_path': 'data/pdf/ManagingCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.4', 'title': '04 Organized Crime and CyberTerrorrism', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813121939Z00'00'", 'trapped': '', 'modDate': "D:20260813121939Z00'00'", 'creationDate': "D:20260813121939Z00'00'", 'page': 0, 'source_file': 'ManagingCrime.pdf', 'file_type': 'pdf'}, page_content='Organized Crime and Cyberterrorism'),
  Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813121939Z00'00'", 'source': 'data/pdf/ManagingCrime.pdf', 'file_path': 'data/pdf/ManagingCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.4', 'title': '04 Organized Crime and CyberTerrorrism', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813121939Z00'00'", 'trapped': '', 'modDate': "D:20260813121939Z00'00'", 'creationDate': "D:20260813121939Z00'00'", 'page': 1, 'source_file': 'ManagingCrime.pdf', 'file_type': 'pdf'}, page_content='Things to Cover\n• Organized Crime on The Internet\n• Traditional Crime Augmented with Computer Systems\n• Computer Crimes Executed by Organized Groups\n• Cyber Terrorism\n• Economic Attacks\n• Information Warfare\n• Cyber Espionage'),
  Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813121939Z00'00'", 'source': 'data/pdf/ManagingCrime.pdf', 'file_path': 'data/pdf/ManagingCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.4', 'title': '04 Organized Crime and CyberTerrorrism', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813121939Z00'00'", 'trapped': '', 'modDate': "D:20260813121939Z00'00'", 'creationDate': "D:20260813121939Z00'00'", 'page': 2, 'source_file': 'ManagingCrime.pdf', 'file_type': 'pdf'}, page_content='Organized Crime on The Internet\n• Internet Organised \nCrime Threat \nAssessment (IOCTA) \n2018\nhttps://www.europol.e\nuropa.eu/internet-\norganised-crime-threat-\nassessment-2018'),
@@ -511,7 +511,7 @@ Metadata: {'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'c
 <p>:::</p>
 <section id="embeddings-the-text" class="level4">
 <h4 class="anchored" data-anchor-id="embeddings-the-text">embeddings the text</h4>
-<div id="00566f42" class="cell" data-execution_count="12">
+<div id="a5a3a837" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sentence_transformers <span class="im">import</span> SentenceTransformer</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> chromadb</span>
@@ -520,7 +520,7 @@ Metadata: {'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'c
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List, Dict, Any, Tuple</span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics.pairwise <span class="im">import</span> cosine_similarity</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="embedding-manager-section" class="cell" data-execution_count="13">
+<p>::: {#cell-embedding manager section .cell execution_count=13}</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> EmbeddingManager:</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Handles document embedding generation using SentenceTransformer"""</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, model_name: <span class="bu">str</span> <span class="op">=</span> <span class="st">"all-MiniLM-L6-v2"</span>):</span>
@@ -532,8 +532,54 @@ Metadata: {'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'c
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model_name <span class="op">=</span> model_name</span>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._load_model()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._load_model() <span class="co"># just like protection function</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _load_model(<span class="va">self</span>):</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Load the SentenceTransformer model"""</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Loading embedding model: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>model_name<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.model <span class="op">=</span> SentenceTransformer(<span class="va">self</span>.model_name)</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Model loaded successfully. Embedding dimension: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>model<span class="sc">.</span>get_embedding_dimension()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Error loading model </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>model_name<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> </span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> generate_embeddings(<span class="va">self</span>, texts: List[<span class="bu">str</span>]) <span class="op">-&gt;</span> np.ndarray:</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a><span class="co">        Generate embeddings for a list of texts</span></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a><span class="co">            texts: List of text strings to embed</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a><span class="co">            numpy array of embeddings with shape (len(texts), embedding_dim)</span></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="va">self</span>.model:</span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Model not loaded"</span>)</span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Generating embeddings for </span><span class="sc">{</span><span class="bu">len</span>(texts)<span class="sc">}</span><span class="ss"> texts..."</span>)</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>        embeddings <span class="op">=</span> <span class="va">self</span>.model.encode(texts, show_progress_bar<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Generated embeddings with shape: </span><span class="sc">{</span>embeddings<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> embeddings</span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a><span class="co"># and then like always we need to initialize the embedding manager</span></span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>embedding_manager<span class="op">=</span>EmbeddingManager()</span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>embedding_manager</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Loading embedding model: all-MiniLM-L6-v2</code></pre>
 </div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Loading weights:   0%|          | 0/103 [00:00&lt;?, ?it/s]
+Loading weights: 100%|██████████| 103/103 [00:00&lt;00:00, 4531.29it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Model loaded successfully. Embedding dimension: 384</code></pre>
+</div>
+<div id="embedding-manager-section" class="cell-output cell-output-display" data-execution_count="65">
+<pre><code>&lt;__main__.EmbeddingManager at 0x3170e89e0&gt;</code></pre>
+</div>
+<p>:::</p>
 
 
 </section>
