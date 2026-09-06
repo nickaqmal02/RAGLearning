@@ -32,6 +32,15 @@ format:
 ```{python}
 #| echo: true
 from langchain_core.documents import Document
+import logging
+
+# setup the logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%H:%M:%S'
+)
+logger = logging.getLogger(__name__)
 
 ```
 
@@ -58,6 +67,7 @@ flowchart LR
     DataIngestion e2@==> Chunk2 
     DataIngestion e1@==> Chunk3
     DataIngestion e2@==> Chunk4
+
 ```
 *so for every chunk we apply embeddings and finally store it into our final vector db
 * **embedding**: convert text to vectors
@@ -187,80 +197,128 @@ pdf_documents
 
 # **RAG PIPELINES DATA INGESTION TO VECTOR DB PIPELINE**
 
+# PREPROCESSING IS A MUST WHEN IT IS ASSOCIATE WITH DATA 
+
+> we using class approach to make it easier to extend by inheritence
+>
+> __init__ is a constructor method used for initialization in Python classes. It's called automatically when you create an instance of a class
+>
+
 ```{python}
-import os
-from langchain_community.document_loaders import PyPDFLoader, PyMuPDFLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+import hashlib
 from pathlib import Path
+from langchain_community.document_loaders import PyMuPDFLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-def process_all_pdfs(pdf_directory):
-    """Process all PDF files in a directory"""
-    # creating list to append all document
-    all_documents = []
-    pdf_dir = Path(pdf_directory)
+class PDFProcessor:
+    """PDF processor with deduplication and loggig"""
 
-    # find all pdf files recursively
-    pdf_files = list(pdf_dir.glob("**/*.pdf"))
+    def __init__(self, pdf_dir="./data", chunk_size=1000, chunk_overlap=200):
+        """Initialize with configuration"""
+        self.pdf_dir = Path(pdf_dir)
+        self.chunk_size = chunk_size
+        self.chunk_overlap = chunk_overlap
+        self.seen_hashes = set()
+        self.documents = []
+        self.stats = {
+            'pdf_files': 0,
+            'unique_pages': 0,
+            'duplicates_skipped': 0,
+            'chunks_created': 0
+        }
 
-    print(f"Found {len(pdf_files)} PDF files to process")
+        logger.info(f" Initialize PDFProcessor with pdf_dir={pdf_dir}")
 
-    for pdf_file in pdf_files:
-        print(f"\nProcessing: {pdf_file.name}")
-        try:
-            loader = PyMuPDFLoader(str(pdf_file))
-            documents = loader.load()
+    def load_pdfs(self):
+        """load and deduplicate PDFs"""
+        logger.info("Starting PDF loading")
 
-            # add the source of information to metadata
-            for doc in documents:
-                doc.metadata['source_file'] = pdf_file.name
-                doc.metadata['file_type'] = 'pdf'
-           
-            all_documents.extend(documents)
-            print(f" Loaded {len(documents)} pages")
-            
-        except Exception as e:
-            print(f" Error :{e}")
+        pdf_files = list(self.pdf_dir.glob("**/*.pdf"))
+        self.stats['pdf_files'] = len(pdf_files)
 
-    print(f"\nTotal documents loaded: {len(all_documents)}")
-    return all_documents
+        logger.info(f" Found {len(pdf_files)} PDF files")
 
-# process all pdf in data dir
-all_pdf_documents = process_all_pdfs("./data")
+        for pdf_file in pdf_files:
+            logger.debug(f" Processing: {pdf_file.name}")
 
-all_pdf_documents
+            try:
+                loader = PyMuPDFLoader(str(pdf_file))
+                docs = loader.load()
+                logger.debug(f" loaded {len(docs)} pages from {pdf_file.name}")
 
-```
+                for doc in docs:
+                    # deduplicate 
+                    content_hash = hashlib.md5(doc.page_content.encode()).hexdigest()
 
-```{python}
-#| label: text splitting get into chunks
+                    if content_hash in self.seen_hashes:
+                        self.stats['duplicates_skipped'] += 1
+                        logger.debug(f" Skipped duplicate in {pdf_file.name}")
 
+                        continue
 
+                    self.seen_hashes.add(content_hash)
+                    doc.metadata['source'] = pdf_file.name
+                    doc.metadata['content_hash'] = content_hash
+                    self.documents.append(doc)
 
-def split_documents(documents, chunk_size=1000, chunk_overlap=200):
-    """splitting the documents into smaller chunks for better RAG performance"""
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=chunk_size,
-        chunk_overlap=chunk_overlap,
-        length_function=len,
-        separators=["\n\n", "\n", " ", ""]
-    )
-    split_docs = text_splitter.split_documents(documents)
-    print(f"Split {len(documents)} documents into {len(split_docs)} chunks")
+            except Exception as e:
+                logger.error(f" Error processing {pdf_file.name}: {e}")
 
-    # show the example of a chunk
-    if split_docs:
-        print(f"\nExample chunk:")
-        print(f"Content: {split_docs[0].page_content[:200]}...")
-        print(f"Metadata: {split_docs[0].metadata}")
+        self.stats['unique_pages'] = len(self.documents)
 
-    return split_docs
+        logger.info(f" Loaded {self.stats['unique_pages']} unique pages")
+        logger.info(f" Skipped {self.stats['duplicates_skipped']}")
+    
+        return self.documents
 
-```
+    def chunk_documents(self):
+        """split the document into chunks"""
+        if not self.documents:
+            logger.warning(" No documents to chunk !")
+            return []
 
-```{python}
-#| label: calling the split method
-chunks=split_documents(all_pdf_documents)
-chunks
+        logger.info(f" chunking {len(self.documents)} documents... ")
+
+        splitter = RecursiveCharacterTextSplitter(
+            chunk_size=self.chunk_size,
+            chunk_overlap=self.chunk_overlap,
+            length_function=len,
+            separators=["\n\n", "\n", " ", ""]
+        )
+
+        chunks = splitter.split_documents(self.documents)
+        self.stats['chunks_created'] = len(chunks)
+
+        logger.info(f" Created {len(chunks)} chunks")
+
+        if chunks:
+            logger.debug(f" Example chunk size {len(chunks[0].page_content)} chars")
+            logger.debug(f" Example chunk metadata: {chunks[0].metadata}")
+
+        return chunks
+
+    def process(self):
+        """Full pipeline: load -> deduplicate -> chunk """
+        logger.info(" Starting our full pipeline")
+        self.load_pdfs()
+        chunks = self.chunk_documents()
+        logger.info(" Pipeline complete !")
+        return chunks
+
+    def get_stats(self):
+        """Get processing statistics"""
+        return self.stats
+
+# == USE IT ==
+
+# create processor
+processor = PDFProcessor(pdf_dir="./data", chunk_size=1000, chunk_overlap=200)
+
+# process everything
+chunks = processor.process()
+
+# check stats
+print("\n Stats:", processor.get_stats())
 
 ```
 
@@ -325,6 +383,360 @@ class EmbeddingManager:
 embedding_manager=EmbeddingManager()
 embedding_manager
 
+```
+
+### > Creating Class VectorStore
+
+```{python}
+#| label: Creating Class of VectorStore
+
+class VectorStore:
+    """Manages document embeddings in a ChromaDB vector store."""
+
+    def __init__(self, collection_name: str = "pdf_documents",
+                 persist_directory: str = "./data/vector_store",
+                 clear_existing: bool = True):
+        """
+        Intialize the vector store
+
+        Args:
+            collection_name: Name of the ChromaDB collection
+            persist_directory: Directory to persist the vector store
+        """
+        self.collection_name = collection_name
+        self.persist_directory = persist_directory
+        self.clear_existing = clear_existing
+        self.client = None
+        self.collection = None
+        self._initialize_store()
+
+    def _initialize_store(self):
+        """Intialize ChromaDB client"""
+        try:
+            # create persistent ChromaDB client
+            os.makedirs(self.persist_directory, exist_ok=True)
+            self.client = chromadb.PersistentClient(path=self.persist_directory)
+            # create client that have relay with chromadb store
+            
+            # clear existing collection if request
+            if self.clear_existing:
+                try:
+                    self.client.delete_collection(self.collection_name)
+                    logger.info(f" Cleared existing collection")
+                except:
+                    logger.debug(f" No existing collection to clear")
+
+            # get or create collection
+            self.collection = self.client.get_or_create_collection(
+                name=self.collection_name,
+                metadata={"description": "PDF document embeddings for RAG"}
+            )
+            print(f"Vector store initialized. Collection: {self.collection_name}")
+            print(f"Existing documents in collection: {self.collection.count()}")
+
+        except Exception as e:
+            print(f"Error initializing vector store: {e}")
+            raise
+
+    def add_documents(self, documents: List[Any], embeddings:np.ndarray):
+        """
+        Add documents and their embeddings to the vector store
+
+        Args:
+            documents: List of LangChain documents
+            embeddings: Corresponding embeddings for the documents
+
+        """
+        if len(documents) != len(embeddings):
+            raise ValueError("Number of documents must match number of embeddings")
+
+        print(f"Adding {len(documents)} documents to vector store ...")
+
+        # prepare data for ChromaDB those belows are what is required
+        ids = []
+        metadatas = []
+        documents_text = []
+        embeddings_list = []
+
+        for i, (doc, embedding) in enumerate(zip(documents, embeddings)):
+            # generate unique ID
+            doc_id = f"doc_{uuid.uuid4().hex[:8]}_{i}"
+            ids.append(doc_id)
+
+            # prepare metadata
+            metadata = dict(doc.metadata)
+            metadata['doc_index'] = i
+            metadata['content_length'] = len(doc.page_content)
+            metadatas.append(metadata)
+
+            # document content
+            documents_text.append(doc.page_content)
+
+            # embedding
+            embeddings_list.append(embedding.tolist())
+
+        # add to collection parameters
+        try:
+            self.collection.add(
+                ids=ids,
+                embeddings=embeddings_list,
+                metadatas=metadatas,
+                documents=documents_text,
+            )
+            print(f"successfully added {len(documents)} documents to vector store")
+            print(f"Total documents in collection: {self.collection.count()}")
+
+        except Exception as e:
+            print(f"Error adding documents to vector store: {e}")
+            raise
+
+    # initializing the vector store
+vectorstore=VectorStore()
+vectorstore
 
 ```
+
+
+```{python}
+#| label: convert text to embeddings
+chunks
+
+texts=[doc.page_content for doc in chunks]
+texts
+
+embeddings=embedding_manager.generate_embeddings(texts)
+
+## store in the vector database
+vectorstore.add_documents(chunks, embeddings)
+
+
+```
+
+> But now how do we perform the Retrieval ? ?
+>
+> What does it mean by Retrieval again ? 
+>
+> **Retrieval**: is how we retrieve the data from out vector db to match with user query 😄
+>
+
+## **RAG RETRIEVAL PIPELINE FROM THE VECTORSTORE <33**
+```{mermaid}
+classDiagram
+    
+UserQuery --> MainSource : embed the query
+    
+    class MainSource{
+        Retriever
+        VectorStore
+    }
+
+    class UserQuery{
+        
+    }
+
+```
+
+
+
+
+
+
+```{python}
+#| label: handles the query-based retrieval from the vector store
+class RAGRetriever:
+    """Handles query-based retrieval from the vector store"""
+
+    def __init__(self, vector_store: VectorStore, embedding_manager: EmbeddingManager):
+        """
+        Initialize the retriever
+
+        Args:
+            vector_store: Vector store containing document embeddings
+            embedding_manager: Manager for generting query embeddings
+        """
+        self.vector_store = vector_store
+        self.embedding_manager = embedding_manager
+
+    # creating the retrieve function
+    def retrieve(self, query: str, top_k: int = 5, score_threshold: float = 0.0) -> List[Dict[str, Any]]:
+        """
+        Retrieve the relevant documents for a query
+
+        Args:
+            query: The search query
+            top_k: Number of top results to return
+            score_threshold: Minimum similarity score threshold
+
+        What we will return ?
+            List of dictionaries containing retrieved documents and metadata
+
+        """
+        logger.info(f"Retrieving documents for query: '{query}'")
+        logger.info(f"Top K: {top_k}, Score threshold: {score_threshold}")
+
+        # generate the query embedding
+        query_embedding = self.embedding_manager.generate_embeddings([query])[0]
+
+        # seach in vector store
+        try:
+            results = self.vector_store.collection.query(
+                query_embeddings=[query_embedding.tolist()],
+                n_results=top_k
+            )
+
+            # process the result 
+            retrieved_docs = []
+
+            if results['documents'] and results['documents'][0]:
+                documents = results['documents'][0]
+                metadatas = results['metadatas'][0]
+                distances = results['distances'][0]
+                ids = results['ids'][0]
+
+                for i, (doc_id, document, metadata, distance) in enumerate(zip(ids, documents, metadatas, distances)):
+                    # convert distance to similarity score (ChromaDB uses cosine distances)
+                    similarity_score = 1 - distance
+
+                    if similarity_score >= score_threshold:
+                        retrieved_docs.append({
+                            'id': doc_id,
+                            'content': document,
+                            'metadata': metadata,
+                            'similarity_score': similarity_score,
+                            'distance': distance,
+                            'rank': i + 1
+                        })
+
+                print(f"Retrieved {len(retrieved_docs)} documents (after filtering)")
+            else:
+                print("No douments found")
+
+            return retrieved_docs
+
+        except Exception as e:
+            print(f"Error during retrieval: {e}")
+            return []
+
+rag_retriever=RAGRetriever(vectorstore, embedding_manager)
+
+rag_retriever
+
+
+```
+
+```{python}
+#| label: asking specific query
+
+rag_retriever.retrieve("The Los Altos house")
+
+```
+
+> NOW WE WILL ADD **LLM** WHICH MEANS **QUERY RETRIEVAL + LLM** INTERPRETING THE RESULT IN MUCH MORE COMPREHENSION WAYS.
+>
+> Now whenever user give a new query, we embed it and store it into our vectordb also and give the context to llm
+>
+> { context + prompt } = Augmentation
+>
+>
+
+# Integration VectorDB context pipelinewith LLM
+
+```{python}
+#| label: Simple RAG pipeline with Groq LLM
+from langchain_groq import ChatGroq
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+### initialize the groq llm 
+groq_api_key = "[REMOVED]"
+
+llm = ChatGroq(groq_api_key=groq_api_key, model_name="groq/compound-mini", temperature=0.1, max_tokens=1024)
+
+# simple RAG function: retrieve the context + generate reponses
+def rag_simple(query, retriever, llm, top_k=3):
+    # retrieve the relevant document
+    results=retriever.retrieve(query, top_k=top_k)
+    context="\n\n".join([doc['content'] for doc in results]) if results else ""
+
+    if not context:
+        return "No relevant context found to answer the question"
+
+    ## generate the answer using Groq LLM
+    prompt=f"""Use the following context to answer the question precisely
+
+        Context:
+        {context}
+
+        Question: {query}
+
+        Answer:"""
+
+    response=llm.invoke([prompt.format(context=context, query=query)])
+    return response.content
+
+```
+
+
+# Enhanced RAG pipelines Features
+
+```{python}
+#| label: using that method to use rag
+
+answer = rag_simple("The Lost Altos House ? ", rag_retriever, llm)
+print(answer)
+
+```
+
+```{python}
+#| label: Enhanced version of RAG pipeline
+
+def rag_advanced(query, retriever, llm, top_k=5, min_score=0.2, return_context=False):
+    """
+    RAG pipeline with extra features:
+    - Returns answer, sources, confidence score, and optionally the full context.
+    """
+    results = retriever.retrieve(query, top_k=top_k, score_threshold=min_score)
+    if not results:
+        return {
+            'answer': 'No relevant context found',
+            'sources': [],
+            'confidence': 0.0,
+            'context': ''
+        }
+
+    # prep for context and sources
+    context = "\n\n".join([doc['content'] for doc in results])
+    sources = [{
+        'source': doc['metadata'].get('source_file', doc['metadata'].get('source', 'unknown')),
+        'page': doc['metadata'].get('page', 'unknown'),
+        'score': doc['similarity_score'],
+        'preview': doc['content'][:300] + '....'
+    }for doc in results]
+    confidence = max([doc['similarity_score'] for doc in results ])
+
+    # generate answer 
+    prompt = f"""Use the following context to answer the question concisely. \nContext:\n{context}\n\nQuestion: {query}\n\nAnswer:"""
+    response = llm.invoke([prompt.format(context=context, query=query)])
+
+    output = {
+        'answer': response.content,
+        'sources': sources,
+        'confidence': confidence
+    }
+    if return_context:
+        output['context'] = context
+    return output
+
+# example of usage
+result = rag_advanced("The Lost Altos House ?", rag_retriever, llm, top_k=3, min_score=0.1, return_context=True)
+print("Answer:", result['answer'])
+print("Sources:", result['sources'])
+print("confidence:", result['confidence'])
+print("Context Preview:", result['context'][:300])
+
+```
+
+
+
 

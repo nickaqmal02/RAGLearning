@@ -12,7 +12,7 @@ website:
       - href: index.qmd
         text: Home
       - href: second.qmd
-        text: Second
+        text: Personal Note
 
 format:
   html:

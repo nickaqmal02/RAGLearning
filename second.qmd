@@ -1,10 +1,75 @@
 ---
-title: second page
 format:
     html:
-      theme: default
+      theme: sketchy
+      author: NIK ABDUL AQMAL BIN ZUNAIDI
       toc: true
 ---
 
-## this is second page
+#📚 **RAG PIPELINE - PERSONAL NOTES**
+=================================
+
+> 📅 DATE: 2026-09-06
+>
+>
+> 👤 AUTHOR: Nicky
+>
+>
+> 🎯 PROJECT: RAG from Scratch
+>
+>
+> 📁 DATA: Steve Jobs PDFs (3 files, 626 pages)
+
+# 🔍 WHAT THIS DOES:
+1. Loads PDFs from ./data
+2. Deduplicates pages using MD5 hashing
+3. Chunks documents (size=1000, overlap=200)
+4. Generates embeddings (all-MiniLM-L6-v2)
+5. Stores in ChromaDB
+6. Retrieves relevant chunks for queries
+
+# ⭐ KEY INSIGHTS:
+- Deduplication MUST happen BEFORE chunking
+- ChromaDB needs clear_existing=True to avoid duplicates
+- Content hashing is the best deduplication method
+- Logging saves hours of debugging
+
+# 🐛 BUGS & FIXES:
+- Duplicate retrieval: Fixed by deduplication
+- Slow embedding: Using mps (Apple Silicon GPU)
+- ChromaDB errors: Delete vector_store folder
+
+# 🔄 WHAT I CHANGED:
+- Added deduplication to PDFProcessor
+- Added logging to all classes
+- Added clear_existing parameter to VectorStore
+- Fixed duplicate issue in retrieval
+
+# 💡 MY LEARNINGS:
+- Classes with __init__ are better than functions
+- Logging = professional programming
+- Always deduplicate at the source
+- Personal notes help future debugging
+
+# 🚀 NEXT STEPS:
+- Add LLM for answer generation
+- Test with more PDFs
+- Create web interface
+- Deploy as API
+
+📌 USEFUL COMMANDS:
+# Clean everything
+rm -rf .quarto _site docs __pycache__ vector_store
+
+# Run pipeline
+python rag_pipeline.py
+
+# Test retrieval
+rag_retriever.retrieve("The Los Altos house")
+
+📚 RESOURCES:
+- LangChain docs: https://python.langchain.com/
+- ChromaDB: https://docs.trychroma.com/
+- Sentence-Transformers: https://www.sbert.net/
+
 

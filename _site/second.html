@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="NIK ABDUL AQMAL BIN ZUNAIDI">
 
-<title>second page – AG</title>
+<title>second – AG</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -45,7 +46,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a925b13a0a2ce4d3eb10c98d32d24808.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-470fba04f78fe621e91a05defd4a37ad.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -100,7 +101,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./second.html" aria-current="page"> 
-<span class="menu-text">Second</span></a>
+<span class="menu-text">Personal Note</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -118,7 +119,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#this-is-second-page" id="toc-this-is-second-page" class="nav-link active" data-scroll-target="#this-is-second-page">this is second page</a></li>
+  <li><a href="#rag-pipeline---personal-notes" id="toc-rag-pipeline---personal-notes" class="nav-link active" data-scroll-target="#rag-pipeline---personal-notes">#📚 <strong>RAG PIPELINE - PERSONAL NOTES</strong></a></li>
+  <li><a href="#what-this-does" id="toc-what-this-does" class="nav-link" data-scroll-target="#what-this-does">🔍 WHAT THIS DOES:</a></li>
+  <li><a href="#key-insights" id="toc-key-insights" class="nav-link" data-scroll-target="#key-insights">⭐ KEY INSIGHTS:</a></li>
+  <li><a href="#bugs-fixes" id="toc-bugs-fixes" class="nav-link" data-scroll-target="#bugs-fixes">🐛 BUGS &amp; FIXES:</a></li>
+  <li><a href="#what-i-changed" id="toc-what-i-changed" class="nav-link" data-scroll-target="#what-i-changed">🔄 WHAT I CHANGED:</a></li>
+  <li><a href="#my-learnings" id="toc-my-learnings" class="nav-link" data-scroll-target="#my-learnings">💡 MY LEARNINGS:</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">🚀 NEXT STEPS:</a></li>
+  <li><a href="#run-pipeline" id="toc-run-pipeline" class="nav-link" data-scroll-target="#run-pipeline">Run pipeline</a></li>
+  <li><a href="#test-retrieval" id="toc-test-retrieval" class="nav-link" data-scroll-target="#test-retrieval">Test retrieval</a></li>
   </ul>
 </nav>
     </div>
@@ -127,13 +136,18 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">second page</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>NIK ABDUL AQMAL BIN ZUNAIDI </p>
+          </div>
+  </div>
     
   
     
@@ -144,8 +158,79 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="this-is-second-page" class="level2">
-<h2 class="anchored" data-anchor-id="this-is-second-page">this is second page</h2>
+<section id="rag-pipeline---personal-notes" class="level1">
+<h1>#📚 <strong>RAG PIPELINE - PERSONAL NOTES</strong></h1>
+<blockquote class="blockquote">
+<p>📅 DATE: 2026-09-06</p>
+<p>👤 AUTHOR: Nicky</p>
+<p>🎯 PROJECT: RAG from Scratch</p>
+<p>📁 DATA: Steve Jobs PDFs (3 files, 626 pages)</p>
+</blockquote>
+</section>
+<section id="what-this-does" class="level1">
+<h1>🔍 WHAT THIS DOES:</h1>
+<ol type="1">
+<li>Loads PDFs from ./data</li>
+<li>Deduplicates pages using MD5 hashing</li>
+<li>Chunks documents (size=1000, overlap=200)</li>
+<li>Generates embeddings (all-MiniLM-L6-v2)</li>
+<li>Stores in ChromaDB</li>
+<li>Retrieves relevant chunks for queries</li>
+</ol>
+</section>
+<section id="key-insights" class="level1">
+<h1>⭐ KEY INSIGHTS:</h1>
+<ul>
+<li>Deduplication MUST happen BEFORE chunking</li>
+<li>ChromaDB needs clear_existing=True to avoid duplicates</li>
+<li>Content hashing is the best deduplication method</li>
+<li>Logging saves hours of debugging</li>
+</ul>
+</section>
+<section id="bugs-fixes" class="level1">
+<h1>🐛 BUGS &amp; FIXES:</h1>
+<ul>
+<li>Duplicate retrieval: Fixed by deduplication</li>
+<li>Slow embedding: Using mps (Apple Silicon GPU)</li>
+<li>ChromaDB errors: Delete vector_store folder</li>
+</ul>
+</section>
+<section id="what-i-changed" class="level1">
+<h1>🔄 WHAT I CHANGED:</h1>
+<ul>
+<li>Added deduplication to PDFProcessor</li>
+<li>Added logging to all classes</li>
+<li>Added clear_existing parameter to VectorStore</li>
+<li>Fixed duplicate issue in retrieval</li>
+</ul>
+</section>
+<section id="my-learnings" class="level1">
+<h1>💡 MY LEARNINGS:</h1>
+<ul>
+<li>Classes with <strong>init</strong> are better than functions</li>
+<li>Logging = professional programming</li>
+<li>Always deduplicate at the source</li>
+<li>Personal notes help future debugging</li>
+</ul>
+</section>
+<section id="next-steps" class="level1">
+<h1>🚀 NEXT STEPS:</h1>
+<ul>
+<li>Add LLM for answer generation</li>
+<li>Test with more PDFs</li>
+<li>Create web interface</li>
+<li>Deploy as API</li>
+</ul>
+<p>📌 USEFUL COMMANDS: # Clean everything rm -rf .quarto _site docs <strong>pycache</strong> vector_store</p>
+</section>
+<section id="run-pipeline" class="level1">
+<h1>Run pipeline</h1>
+<p>python rag_pipeline.py</p>
+</section>
+<section id="test-retrieval" class="level1">
+<h1>Test retrieval</h1>
+<p>rag_retriever.retrieve(“The Los Altos house”)</p>
+<p>📚 RESOURCES: - LangChain docs: https://python.langchain.com/ - ChromaDB: https://docs.trychroma.com/ - Sentence-Transformers: https://www.sbert.net/</p>
 
 
 </section>
