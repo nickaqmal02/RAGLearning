@@ -210,7 +210,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Retrieval Augmented Generation: Process of optimizing LLM output</p>
 <p>so it will refer to authorized knowledge base outside its training data source</p>
 </blockquote>
-<div id="f9881960" class="cell" data-execution_count="1">
+<div id="c4bfb54c" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> langchain_core.documents <span class="im">import</span> Document</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -227,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>we have much more type of RAG so like Agentic RAG</p>
 <p>Augmentation means we give context to llm and generate the output <strong>Data Ingestion and Data Parsing</strong></p>
 </blockquote>
-<div id="7c095d22" class="cell" data-execution_count="2">
+<div id="190e1e32" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-layout-align="default">
@@ -248,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><em>so for every chunk we apply embeddings and finally store it into our final vector db </em> <strong>embedding</strong>: convert text to vectors</p>
-<div id="577b5841" class="cell" data-execution_count="3">
+<div id="547af197" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">### document structure</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> langchain_core.documents <span class="im">import</span> Document</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># if we wanna improve our RAG we shall use metadata</span></span>
@@ -267,14 +267,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Document(metadata={'source': 'example.txt', 'pages': 1, 'author': 'Khrisk Naik', 'date_created': '2025-01-07'}, page_content='this is the main text content I am using to create RAG')</code></pre>
 </div>
 </div>
-<div id="5ed0553c" class="cell" data-execution_count="4">
+<div id="a65fd241" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a simple txt file</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>os.makedirs(<span class="st">"./data/text_files"</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># using one dot will create this folder in current pwd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="d6e3b8c1" class="cell" data-execution_count="5">
+<div id="e9cbf757" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sample_texts<span class="op">=</span>{</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"./data/text_files/python_intro.txt"</span>:<span class="st">"""Python Programming Introductio </span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -326,7 +326,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>document<span class="op">=</span> loader.load()</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(document)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/k9/jpkqgpj53ml3jm5t16dfrs840000gn/T/ipykernel_8807/706587265.py:1: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+<pre><code>/var/folders/k9/jpkqgpj53ml3jm5t16dfrs840000gn/T/ipykernel_85423/706587265.py:1: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
   from langchain_community.document_loaders import TextLoader
 /Users/apple/miniforge3/envs/jupyter_env/lib/python3.12/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
   from .autonotebook import tqdm as notebook_tqdm</code></pre>
@@ -353,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stderr">
 <pre><code>
   0%|          | 0/2 [00:00&lt;?, ?it/s]
-100%|██████████| 2/2 [00:00&lt;00:00, 1231.45it/s]</code></pre>
+100%|██████████| 2/2 [00:00&lt;00:00, 1591.16it/s]</code></pre>
 </div>
 <div id="directory-loader" class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>[Document(metadata={'source': 'data/text_files/python_intro.txt'}, page_content='Python Programming Introductio \n\nPython is a high level, interpreted programming languange known for its simplicity and readability.\nCreated by Guido van Rosum and first released in 1991, Python has become one of the most popular \nProgramming languanges in the world.\n\nKey Features:\n- easy to learn and use \n- extensive standard Library\n- \n\npython also widely used in web development, data science, artificial intelligence, and automation.\n\n'),
@@ -375,24 +375,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>pdf_documents</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
-  0%|          | 0/3 [00:00&lt;?, ?it/s]
- 33%|███▎      | 1/3 [00:00&lt;00:00,  7.06it/s]
- 67%|██████▋   | 2/3 [00:01&lt;00:00,  1.05it/s]
-100%|██████████| 3/3 [00:01&lt;00:00,  1.78it/s]</code></pre>
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+100%|██████████| 1/1 [00:01&lt;00:00,  1.37s/it]
+100%|██████████| 1/1 [00:01&lt;00:00,  1.37s/it]</code></pre>
 </div>
 <div id="pdf-loader" class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>[Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 0}, page_content=''),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 1}, page_content=''),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 2}, page_content=''),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 3}, page_content=''),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 4}, page_content=''),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 5}, page_content=''),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 6}, page_content=''),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 7}, page_content=''),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 8}, page_content=''),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 9}, page_content=''),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813122028Z00'00'", 'source': 'data/pdf/OrganizedCrime.pdf', 'file_path': 'data/pdf/OrganizedCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.3', 'title': 'Organized Crime 2026', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813122028Z00'00'", 'trapped': '', 'modDate': "D:20260813122028Z00'00'", 'creationDate': "D:20260813122028Z00'00'", 'page': 10}, page_content=''),
- Document(metadata={'producer': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creator': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creationdate': '2020-01-29T03:08:19+00:00', 'source': 'data/pdf/SteveJobs.pdf', 'file_path': 'data/pdf/SteveJobs.pdf', 'total_pages': 622, 'format': 'PDF 1.4', 'title': 'Steve Jobs', 'author': 'Isaacson, Walter', 'subject': '', 'keywords': '', 'moddate': '', 'trapped': '', 'modDate': '', 'creationDate': "D:20200129030819+00'00'", 'page': 0}, page_content=''),
+<pre><code>[Document(metadata={'producer': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creator': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creationdate': '2020-01-29T03:08:19+00:00', 'source': 'data/pdf/SteveJobs.pdf', 'file_path': 'data/pdf/SteveJobs.pdf', 'total_pages': 622, 'format': 'PDF 1.4', 'title': 'Steve Jobs', 'author': 'Isaacson, Walter', 'subject': '', 'keywords': '', 'moddate': '', 'trapped': '', 'modDate': '', 'creationDate': "D:20200129030819+00'00'", 'page': 0}, page_content=''),
  Document(metadata={'producer': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creator': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creationdate': '2020-01-29T03:08:19+00:00', 'source': 'data/pdf/SteveJobs.pdf', 'file_path': 'data/pdf/SteveJobs.pdf', 'total_pages': 622, 'format': 'PDF 1.4', 'title': 'Steve Jobs', 'author': 'Isaacson, Walter', 'subject': '', 'keywords': '', 'moddate': '', 'trapped': '', 'modDate': '', 'creationDate': "D:20200129030819+00'00'", 'page': 1}, page_content=''),
  Document(metadata={'producer': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creator': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creationdate': '2020-01-29T03:08:19+00:00', 'source': 'data/pdf/SteveJobs.pdf', 'file_path': 'data/pdf/SteveJobs.pdf', 'total_pages': 622, 'format': 'PDF 1.4', 'title': 'Steve Jobs', 'author': 'Isaacson, Walter', 'subject': '', 'keywords': '', 'moddate': '', 'trapped': '', 'modDate': '', 'creationDate': "D:20200129030819+00'00'", 'page': 2}, page_content='FROM THE AUTHOR OF THE BESTSELLING BIOGRAPHIES OF\nBENJAMIN FRANKLIN AND ALBERT EINSTEIN, THIS IS THE\nEXCLUSIVE BIOGRAPHY OF STEVE JOBS.\nBased on more than forty interviews with Jobs conducted over two years—as well as\ninterviews with more than a hundred family members, friends, adversaries,\ncompetitors, and colleagues—Walter Isaacson has written a riveting story of the\nroller-coaster life and searingly intense personality of a creative entrepreneur whose\npassion for perfection and ferocious drive revolutionized six industries: personal\ncomputers, animated movies, music, phones, tablet computing, and digital\npublishing.\nAt a time when America is seeking ways to sustain its innovative edge, Jobs\nstands as the ultimate icon of inventiveness and applied imagination. He knew that\nthe best way to create value in the twenty-first century was to connect creativity\nwith technology. He built a company where leaps of the imagination were\ncombined with remarkable feats of engineering.\nAlthough Jobs cooperated with this book, he asked for no control over what was\nwritten nor even the right to read it before it was published. He put nothing\nofflimits. He encouraged the people he knew to speak honestly. And Jobs speaks\ncandidly, sometimes brutally so, about the people he worked with and competed\nagainst. His friends, foes, and colleagues provide an unvarnished view of the\npassions, perfectionism, obsessions, artistry, devilry, and compulsion for control\nthat shaped his approach to business and the innovative products that resulted.\nDriven by demons, Jobs could drive those around him to fury and despair. But\nhis personality and products were interrelated, just as Apple’s hardware and software\ntended to be, as if part of an integrated system. His tale is instructive and\ncautionary, filled with lessons about innovation, character, leadership, and values.'),
  Document(metadata={'producer': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creator': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creationdate': '2020-01-29T03:08:19+00:00', 'source': 'data/pdf/SteveJobs.pdf', 'file_path': 'data/pdf/SteveJobs.pdf', 'total_pages': 622, 'format': 'PDF 1.4', 'title': 'Steve Jobs', 'author': 'Isaacson, Walter', 'subject': '', 'keywords': '', 'moddate': '', 'trapped': '', 'modDate': '', 'creationDate': "D:20200129030819+00'00'", 'page': 3}, page_content='Walter Isaacson, the CEO of the Aspen Institute, has been the chairman of\nCNN and the managing editor of Time magazine. He is the author of Einstein: His\nLife and Universe, Benjamin Franklin: An American Life, and Kissinger: A Biography,\nand is the coauthor, with Evan Thomas, of The Wise Men: Six Friends and the\nWorld They Made. He and his wife live in Washington, D.C.\nMEET THE AUTHORS, WATCH VIDEOS AND MORE AT\nSimonandSchuster.com\n• THE SOURCE FOR READING GROUPS •\nJACKET PHOTOGRAPHS: FRONT BY ALBERT WATSON;\nBACK BY NORMAN SEEFF\nCOPYRIGHT © 2011 SIMON &amp; SCHUSTER'),
@@ -1013,18 +1001,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  Document(metadata={'producer': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creator': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creationdate': '2020-01-29T03:08:19+00:00', 'source': 'data/pdf/SteveJobs.pdf', 'file_path': 'data/pdf/SteveJobs.pdf', 'total_pages': 622, 'format': 'PDF 1.4', 'title': 'Steve Jobs', 'author': 'Isaacson, Walter', 'subject': '', 'keywords': '', 'moddate': '', 'trapped': '', 'modDate': '', 'creationDate': "D:20200129030819+00'00'", 'page': 618}, page_content='FOOTNOTES\n1 Raskin died of pancreatic cancer in 2005, not long after Jobs was diagnosed\nwith the disease.\n2 The firm changed its name from frogdesign to frog design in 2000 and moved\nto San Francisco. Esslinger picked the original name not merely because frogs\nhave the ability to metamorphose, but as a salute to its roots in the (f)ederal\n(r)epublic (o)f (g)ermany. He said that “the lowercase letters offered a nod to the\nBauhaus notion of a non-hierarchical language, reinforcing the company’s ethos\nof democratic partnership.”'),
  Document(metadata={'producer': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creator': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creationdate': '2020-01-29T03:08:19+00:00', 'source': 'data/pdf/SteveJobs.pdf', 'file_path': 'data/pdf/SteveJobs.pdf', 'total_pages': 622, 'format': 'PDF 1.4', 'title': 'Steve Jobs', 'author': 'Isaacson, Walter', 'subject': '', 'keywords': '', 'moddate': '', 'trapped': '', 'modDate': '', 'creationDate': "D:20200129030819+00'00'", 'page': 619}, page_content=''),
  Document(metadata={'producer': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creator': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creationdate': '2020-01-29T03:08:19+00:00', 'source': 'data/pdf/SteveJobs.pdf', 'file_path': 'data/pdf/SteveJobs.pdf', 'total_pages': 622, 'format': 'PDF 1.4', 'title': 'Steve Jobs', 'author': 'Isaacson, Walter', 'subject': '', 'keywords': '', 'moddate': '', 'trapped': '', 'modDate': '', 'creationDate': "D:20200129030819+00'00'", 'page': 620}, page_content=''),
- Document(metadata={'producer': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creator': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creationdate': '2020-01-29T03:08:19+00:00', 'source': 'data/pdf/SteveJobs.pdf', 'file_path': 'data/pdf/SteveJobs.pdf', 'total_pages': 622, 'format': 'PDF 1.4', 'title': 'Steve Jobs', 'author': 'Isaacson, Walter', 'subject': '', 'keywords': '', 'moddate': '', 'trapped': '', 'modDate': '', 'creationDate': "D:20200129030819+00'00'", 'page': 621}, page_content='We hope you enjoyed reading this Simon &amp;\nSchuster eBook.\nSign up for our newsletter and receive special offers, access to bonus\ncontent, and info on the latest new releases and other great eBooks from\nSimon &amp; Schuster.\nor visit us online to sign up at\neBookNews.SimonandSchuster.com'),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813121939Z00'00'", 'source': 'data/pdf/ManagingCrime.pdf', 'file_path': 'data/pdf/ManagingCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.4', 'title': '04 Organized Crime and CyberTerrorrism', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813121939Z00'00'", 'trapped': '', 'modDate': "D:20260813121939Z00'00'", 'creationDate': "D:20260813121939Z00'00'", 'page': 0}, page_content='Organized Crime and Cyberterrorism'),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813121939Z00'00'", 'source': 'data/pdf/ManagingCrime.pdf', 'file_path': 'data/pdf/ManagingCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.4', 'title': '04 Organized Crime and CyberTerrorrism', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813121939Z00'00'", 'trapped': '', 'modDate': "D:20260813121939Z00'00'", 'creationDate': "D:20260813121939Z00'00'", 'page': 1}, page_content='Things to Cover\n• Organized Crime on The Internet\n• Traditional Crime Augmented with Computer Systems\n• Computer Crimes Executed by Organized Groups\n• Cyber Terrorism\n• Economic Attacks\n• Information Warfare\n• Cyber Espionage'),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813121939Z00'00'", 'source': 'data/pdf/ManagingCrime.pdf', 'file_path': 'data/pdf/ManagingCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.4', 'title': '04 Organized Crime and CyberTerrorrism', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813121939Z00'00'", 'trapped': '', 'modDate': "D:20260813121939Z00'00'", 'creationDate': "D:20260813121939Z00'00'", 'page': 2}, page_content='Organized Crime on The Internet\n• Internet Organised \nCrime Threat \nAssessment (IOCTA) \n2018\nhttps://www.europol.e\nuropa.eu/internet-\norganised-crime-threat-\nassessment-2018'),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813121939Z00'00'", 'source': 'data/pdf/ManagingCrime.pdf', 'file_path': 'data/pdf/ManagingCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.4', 'title': '04 Organized Crime and CyberTerrorrism', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813121939Z00'00'", 'trapped': '', 'modDate': "D:20260813121939Z00'00'", 'creationDate': "D:20260813121939Z00'00'", 'page': 3}, page_content='Traditional Crime Augmented with Computer \nSystems\nAre they really that different?\nCyber organized criminals have utilized information and communication \ntechnology (ICT) to facilitate various forms of traditionally offline \norganized crime activities, such as the smuggling of migrants and \ntrafficking in persons, wildlife, drugs, firearms, and cigarettes trafficking'),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813121939Z00'00'", 'source': 'data/pdf/ManagingCrime.pdf', 'file_path': 'data/pdf/ManagingCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.4', 'title': '04 Organized Crime and CyberTerrorrism', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813121939Z00'00'", 'trapped': '', 'modDate': "D:20260813121939Z00'00'", 'creationDate': "D:20260813121939Z00'00'", 'page': 4}, page_content='Computer Crimes Executed by Organized \nGroups\n• Ocean Eleven, Twelve, 13, …Ocean 8…? VS James Bond\n• The New Mafia – Gangs and Vigilantes \nCyber Criminals are no longer isolated/individualized acts, pervasive &amp; \nsavage practices run by organized groups\n• Traditional criminals\n• State sponsored attackers\n• Ideological attackers\n• Hackers-for-hire\n• Refer to this paper on organized crime'),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813121939Z00'00'", 'source': 'data/pdf/ManagingCrime.pdf', 'file_path': 'data/pdf/ManagingCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.4', 'title': '04 Organized Crime and CyberTerrorrism', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813121939Z00'00'", 'trapped': '', 'modDate': "D:20260813121939Z00'00'", 'creationDate': "D:20260813121939Z00'00'", 'page': 5}, page_content='Cyber Espionage\nCyber espionage is an act of gaining \nunauthorized \nnetwork \nor \nsystem \naccess, usually to obtain the sensitive \ndata of a government or a military \ninfrastructure using proxy servers. This \nnotorious practice is an attempt to \ndamage or misuse compromised data, \nwhich usually refers to political, \neconomic, or military data. In the \nworld of cyber espionage, the threat \nactors are generally either state-\naffiliated actors or nation-states with \nthe motive of strategic advantage.'),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813121939Z00'00'", 'source': 'data/pdf/ManagingCrime.pdf', 'file_path': 'data/pdf/ManagingCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.4', 'title': '04 Organized Crime and CyberTerrorrism', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813121939Z00'00'", 'trapped': '', 'modDate': "D:20260813121939Z00'00'", 'creationDate': "D:20260813121939Z00'00'", 'page': 6}, page_content='Cyber Terrorism\n• “the politically motivated use of computers \nand information technology to cause severe \ndisruption or widespread fear in society”\n• Cause FEAR \n• Anonymous Claims To Avert Possible \nTerrorist Attack On Italy\n• Read this article; ACTIVISM, HACKTIVISM, \nAND CYBERTERRORISM:THE INTERNET AS A \nTOOL FOR INFLUENCING FOREIGN POLICY'),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813121939Z00'00'", 'source': 'data/pdf/ManagingCrime.pdf', 'file_path': 'data/pdf/ManagingCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.4', 'title': '04 Organized Crime and CyberTerrorrism', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813121939Z00'00'", 'trapped': '', 'modDate': "D:20260813121939Z00'00'", 'creationDate': "D:20260813121939Z00'00'", 'page': 7}, page_content='Economic Attacks\n• How a Cyber Attack Could Cause the Next \nFinancial Crisis\n• https://www.technology.org/2019/07/17/bigge\nst-cyber-attacks-and-their-cost-for-the-global-\neconomy/\n• https://blog.itgovernance.asia/blog/malaysia-\ncould-lose-us12-2-billion-from-cyber-security-\nthreats\n• Lates on Corona – Nationwide shutdown \nhttps://economictimes.indiatimes.com/tech/inter\nnet/india-facing-more-cyber-attacks-from-china-\nand-pakistan-since-nationwide-\nlockdown/articleshow/76962155.cms'),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813121939Z00'00'", 'source': 'data/pdf/ManagingCrime.pdf', 'file_path': 'data/pdf/ManagingCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.4', 'title': '04 Organized Crime and CyberTerrorrism', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813121939Z00'00'", 'trapped': '', 'modDate': "D:20260813121939Z00'00'", 'creationDate': "D:20260813121939Z00'00'", 'page': 8}, page_content=''),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813121939Z00'00'", 'source': 'data/pdf/ManagingCrime.pdf', 'file_path': 'data/pdf/ManagingCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.4', 'title': '04 Organized Crime and CyberTerrorrism', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813121939Z00'00'", 'trapped': '', 'modDate': "D:20260813121939Z00'00'", 'creationDate': "D:20260813121939Z00'00'", 'page': 9}, page_content="Information Warfare\nInformation warfare is the manipulation of information trusted by a \ntarget without the target's awareness so that the target will make \ndecisions against their interest but in the interest of the one \nconducting information warfare.\nFor discussion; try to find out the latest investigations done on \ninformation warfare. Present it in class on Thursday."),
- Document(metadata={'producer': 'macOS Version 26.3 (Build 25D125) Quartz PDFContext', 'creator': 'PowerPoint', 'creationdate': "D:20260813121939Z00'00'", 'source': 'data/pdf/ManagingCrime.pdf', 'file_path': 'data/pdf/ManagingCrime.pdf', 'total_pages': 11, 'format': 'PDF 1.4', 'title': '04 Organized Crime and CyberTerrorrism', 'author': 'apple', 'subject': '', 'keywords': '', 'moddate': "D:20260813121939Z00'00'", 'trapped': '', 'modDate': "D:20260813121939Z00'00'", 'creationDate': "D:20260813121939Z00'00'", 'page': 10}, page_content='References\n• https://www.infosecurity-magazine.com/news/cybercrime-driven-\nfour-\ndistinct/#:~:text=A%20new%20report%20from%20Malwarebytes,and\n%20hackers%2Dfor%2Dhire.\n• https://www.unodc.org/e4j/en/cybercrime/module-13/key-\nissues/cyber-organized-crime-activities.html')]</code></pre>
+ Document(metadata={'producer': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creator': 'calibre 3.48.0 [https://calibre-ebook.com]', 'creationdate': '2020-01-29T03:08:19+00:00', 'source': 'data/pdf/SteveJobs.pdf', 'file_path': 'data/pdf/SteveJobs.pdf', 'total_pages': 622, 'format': 'PDF 1.4', 'title': 'Steve Jobs', 'author': 'Isaacson, Walter', 'subject': '', 'keywords': '', 'moddate': '', 'trapped': '', 'modDate': '', 'creationDate': "D:20200129030819+00'00'", 'page': 621}, page_content='We hope you enjoyed reading this Simon &amp;\nSchuster eBook.\nSign up for our newsletter and receive special offers, access to bonus\ncontent, and info on the latest new releases and other great eBooks from\nSimon &amp; Schuster.\nor visit us online to sign up at\neBookNews.SimonandSchuster.com')]</code></pre>
 </div>
 <p>:::</p>
 </section>
@@ -1043,7 +1020,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>we using class approach to make it easier to extend by inheritence</p>
 <p><strong>init</strong> is a constructor method used for initialization in Python classes. It’s called automatically when you create an instance of a class</p>
 </blockquote>
-<div id="4f3818cc" class="cell" data-execution_count="9">
+<div id="44109141" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hashlib</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> langchain_community.document_loaders <span class="im">import</span> PyMuPDFLoader</span>
@@ -1159,24 +1136,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-113"><a href="#cb17-113" aria-hidden="true" tabindex="-1"></a><span class="co"># check stats</span></span>
 <span id="cb17-114"><a href="#cb17-114" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> Stats:"</span>, processor.get_stats())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>14:22:41 - __main__ - INFO -  Initialize PDFProcessor with pdf_dir=./data
-14:22:41 - __main__ - INFO -  Starting our full pipeline
-14:22:41 - __main__ - INFO - Starting PDF loading
-14:22:41 - __main__ - INFO -  Found 3 PDF files
-14:22:42 - __main__ - INFO -  Loaded 626 unique pages
-14:22:42 - __main__ - INFO -  Skipped 18
-14:22:42 - __main__ - INFO -  chunking 626 documents... 
-14:22:42 - __main__ - INFO -  Created 1892 chunks
-14:22:42 - __main__ - INFO -  Pipeline complete !</code></pre>
+<pre><code>14:45:57 - __main__ - INFO -  Initialize PDFProcessor with pdf_dir=./data
+14:45:57 - __main__ - INFO -  Starting our full pipeline
+14:45:57 - __main__ - INFO - Starting PDF loading
+14:45:57 - __main__ - INFO -  Found 1 PDF files
+14:45:58 - __main__ - INFO -  Loaded 616 unique pages
+14:45:58 - __main__ - INFO -  Skipped 6
+14:45:58 - __main__ - INFO -  chunking 616 documents... 
+14:45:58 - __main__ - INFO -  Created 1882 chunks
+14:45:58 - __main__ - INFO -  Pipeline complete !</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
- Stats: {'pdf_files': 3, 'unique_pages': 626, 'duplicates_skipped': 18, 'chunks_created': 1892}</code></pre>
+ Stats: {'pdf_files': 1, 'unique_pages': 616, 'duplicates_skipped': 6, 'chunks_created': 1882}</code></pre>
 </div>
 </div>
 <section id="embeddings-the-text" class="level4">
 <h4 class="anchored" data-anchor-id="embeddings-the-text">embeddings the text</h4>
-<div id="bf766ea0" class="cell" data-execution_count="10">
+<div id="9d044e74" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sentence_transformers <span class="im">import</span> SentenceTransformer</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> chromadb</span>
@@ -1231,57 +1208,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>embedding_manager<span class="op">=</span>EmbeddingManager()</span>
 <span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>embedding_manager</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>14:22:43 - sentence_transformers.base.model - INFO - No device provided, using mps</code></pre>
+<pre><code>14:45:58 - sentence_transformers.base.model - INFO - No device provided, using mps</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Loading embedding model: all-MiniLM-L6-v2</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>14:22:43 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
-14:22:43 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/modules.json "HTTP/1.1 200 OK"
-14:22:43 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+<pre><code>14:45:59 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+14:45:59 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/modules.json "HTTP/1.1 200 OK"
+14:45:59 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-14:22:43 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-14:22:43 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/config_sentence_transformers.json "HTTP/1.1 200 OK"
-14:22:43 - sentence_transformers.base.model - INFO - Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
-14:22:43 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
-14:22:43 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/config_sentence_transformers.json "HTTP/1.1 200 OK"
-14:22:44 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
-14:22:44 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/README.md "HTTP/1.1 200 OK"
-14:22:44 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
-14:22:44 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/modules.json "HTTP/1.1 200 OK"
-14:22:44 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
-14:22:44 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/sentence_bert_config.json "HTTP/1.1 200 OK"
-14:22:45 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
-14:22:45 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-14:22:45 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/config.json "HTTP/1.1 200 OK"
+14:45:59 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+14:45:59 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/config_sentence_transformers.json "HTTP/1.1 200 OK"
+14:45:59 - sentence_transformers.base.model - INFO - Loading SentenceTransformer model from sentence-transformers/all-MiniLM-L6-v2.
+14:45:59 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+14:45:59 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/config_sentence_transformers.json "HTTP/1.1 200 OK"
+14:46:00 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+14:46:00 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/README.md "HTTP/1.1 200 OK"
+14:46:00 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+14:46:00 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/modules.json "HTTP/1.1 200 OK"
+14:46:00 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+14:46:00 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/sentence_bert_config.json "HTTP/1.1 200 OK"
+14:46:00 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+14:46:01 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+14:46:01 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/config.json "HTTP/1.1 200 OK"
 
 Loading weights:   0%|          | 0/103 [00:00&lt;?, ?it/s]
-Loading weights: 100%|██████████| 103/103 [00:00&lt;00:00, 4715.89it/s]
-14:22:45 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
-14:22:45 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
-14:22:46 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
-14:22:46 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
-14:22:46 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-14:22:46 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/tokenizer_config.json "HTTP/1.1 200 OK"
-14:22:46 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-14:22:46 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/config.json "HTTP/1.1 200 OK"
-14:22:47 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-14:22:47 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/config.json "HTTP/1.1 200 OK"
-14:22:47 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-14:22:47 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/tokenizer_config.json "HTTP/1.1 200 OK"
-14:22:47 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&amp;expand=false "HTTP/1.1 404 Not Found"
-14:22:47 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&amp;expand=false "HTTP/1.1 200 OK"
-14:22:48 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
-14:22:48 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
-14:22:48 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/2_Normalize/config.json "HTTP/1.1 404 Not Found"
-14:22:48 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"</code></pre>
+Loading weights: 100%|██████████| 103/103 [00:00&lt;00:00, 7591.83it/s]
+14:46:01 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+14:46:01 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+14:46:02 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/video_preprocessor_config.json "HTTP/1.1 404 Not Found"
+14:46:02 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/preprocessor_config.json "HTTP/1.1 404 Not Found"
+14:46:02 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+14:46:02 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/tokenizer_config.json "HTTP/1.1 200 OK"
+14:46:02 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+14:46:02 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/config.json "HTTP/1.1 200 OK"
+14:46:03 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+14:46:03 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/config.json "HTTP/1.1 200 OK"
+14:46:03 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+14:46:03 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/tokenizer_config.json "HTTP/1.1 200 OK"
+14:46:03 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&amp;expand=false "HTTP/1.1 404 Not Found"
+14:46:04 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&amp;expand=false "HTTP/1.1 200 OK"
+14:46:04 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+14:46:04 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/1110a243fdf4706b3f48f1d95db1a4f5529b4d41/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+14:46:04 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/2_Normalize/config.json "HTTP/1.1 404 Not Found"
+14:46:04 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Model loaded successfully. Embedding dimension: 384</code></pre>
 </div>
 <div id="embedding-manager-section" class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>&lt;__main__.EmbeddingManager at 0x31b05f8f0&gt;</code></pre>
+<pre><code>&lt;__main__.EmbeddingManager at 0x17fe2faa0&gt;</code></pre>
 </div>
 <p>:::</p>
 </section>
@@ -1392,14 +1369,14 @@ Loading weights: 100%|██████████| 103/103 [00:00&lt;00:00, 4
 <span id="cb27-102"><a href="#cb27-102" aria-hidden="true" tabindex="-1"></a>vectorstore<span class="op">=</span>VectorStore()</span>
 <span id="cb27-103"><a href="#cb27-103" aria-hidden="true" tabindex="-1"></a>vectorstore</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>14:22:49 - __main__ - INFO -  Cleared existing collection</code></pre>
+<pre><code>14:46:05 - __main__ - INFO -  Cleared existing collection</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Vector store initialized. Collection: pdf_documents
 Existing documents in collection: 0</code></pre>
 </div>
 <div id="creating-class-of-vectorstore" class="cell-output cell-output-display" data-execution_count="12">
-<pre><code>&lt;__main__.VectorStore at 0x321ebd190&gt;</code></pre>
+<pre><code>&lt;__main__.VectorStore at 0x17ff90530&gt;</code></pre>
 </div>
 <p>:::</p>
 <div id="convert-text-to-embeddings" class="cell" data-execution_count="13">
@@ -1413,53 +1390,47 @@ Existing documents in collection: 0</code></pre>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co">## store in the vector database</span></span>
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>vectorstore.add_documents(chunks, embeddings)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Generating embeddings for 1892 texts...</code></pre>
+<pre><code>Generating embeddings for 1882 texts...</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
-Batches:   0%|          | 0/60 [00:00&lt;?, ?it/s]
-Batches:   2%|▏         | 1/60 [00:00&lt;00:35,  1.65it/s]
-Batches:   5%|▌         | 3/60 [00:00&lt;00:13,  4.37it/s]
-Batches:   7%|▋         | 4/60 [00:00&lt;00:10,  5.42it/s]
-Batches:   8%|▊         | 5/60 [00:01&lt;00:08,  6.37it/s]
-Batches:  10%|█         | 6/60 [00:01&lt;00:07,  7.14it/s]
-Batches:  12%|█▏        | 7/60 [00:01&lt;00:06,  7.85it/s]
-Batches:  15%|█▌        | 9/60 [00:01&lt;00:05,  8.80it/s]
-Batches:  18%|█▊        | 11/60 [00:01&lt;00:05,  9.29it/s]
-Batches:  22%|██▏       | 13/60 [00:01&lt;00:04,  9.66it/s]
-Batches:  25%|██▌       | 15/60 [00:02&lt;00:04,  9.53it/s]
-Batches:  28%|██▊       | 17/60 [00:02&lt;00:04,  9.67it/s]
-Batches:  30%|███       | 18/60 [00:02&lt;00:04,  9.72it/s]
-Batches:  32%|███▏      | 19/60 [00:02&lt;00:04,  9.77it/s]
-Batches:  35%|███▌      | 21/60 [00:02&lt;00:03,  9.94it/s]
-Batches:  38%|███▊      | 23/60 [00:02&lt;00:03, 10.05it/s]
-Batches:  42%|████▏     | 25/60 [00:03&lt;00:03,  9.83it/s]
-Batches:  43%|████▎     | 26/60 [00:03&lt;00:03,  9.69it/s]
-Batches:  45%|████▌     | 27/60 [00:03&lt;00:03,  9.70it/s]
-Batches:  48%|████▊     | 29/60 [00:03&lt;00:03,  9.73it/s]
-Batches:  50%|█████     | 30/60 [00:03&lt;00:03,  9.43it/s]
-Batches:  52%|█████▏    | 31/60 [00:03&lt;00:03,  9.31it/s]
-Batches:  55%|█████▌    | 33/60 [00:03&lt;00:02,  9.48it/s]
-Batches:  58%|█████▊    | 35/60 [00:04&lt;00:02,  9.88it/s]
-Batches:  62%|██████▏   | 37/60 [00:04&lt;00:02, 10.02it/s]
-Batches:  65%|██████▌   | 39/60 [00:04&lt;00:02, 10.08it/s]
-Batches:  68%|██████▊   | 41/60 [00:04&lt;00:01, 10.09it/s]
-Batches:  72%|███████▏  | 43/60 [00:04&lt;00:01,  9.99it/s]
-Batches:  75%|███████▌  | 45/60 [00:05&lt;00:01, 10.09it/s]
-Batches:  78%|███████▊  | 47/60 [00:05&lt;00:01, 10.17it/s]
-Batches:  82%|████████▏ | 49/60 [00:05&lt;00:00, 11.27it/s]
-Batches:  85%|████████▌ | 51/60 [00:05&lt;00:00, 12.47it/s]
-Batches:  88%|████████▊ | 53/60 [00:05&lt;00:00, 13.16it/s]
-Batches:  92%|█████████▏| 55/60 [00:05&lt;00:00, 14.65it/s]
-Batches:  95%|█████████▌| 57/60 [00:05&lt;00:00, 15.70it/s]
-Batches:  98%|█████████▊| 59/60 [00:05&lt;00:00, 16.75it/s]
-Batches: 100%|██████████| 60/60 [00:05&lt;00:00, 10.06it/s]</code></pre>
+Batches:   0%|          | 0/59 [00:00&lt;?, ?it/s]
+Batches:   2%|▏         | 1/59 [00:00&lt;00:18,  3.14it/s]
+Batches:   5%|▌         | 3/59 [00:00&lt;00:08,  6.99it/s]
+Batches:   8%|▊         | 5/59 [00:00&lt;00:06,  9.00it/s]
+Batches:  12%|█▏        | 7/59 [00:00&lt;00:05, 10.11it/s]
+Batches:  15%|█▌        | 9/59 [00:00&lt;00:04, 10.88it/s]
+Batches:  19%|█▊        | 11/59 [00:01&lt;00:04, 11.37it/s]
+Batches:  22%|██▏       | 13/59 [00:01&lt;00:03, 11.72it/s]
+Batches:  25%|██▌       | 15/59 [00:01&lt;00:03, 11.44it/s]
+Batches:  29%|██▉       | 17/59 [00:01&lt;00:03, 11.69it/s]
+Batches:  32%|███▏      | 19/59 [00:01&lt;00:03, 11.88it/s]
+Batches:  36%|███▌      | 21/59 [00:01&lt;00:03, 11.73it/s]
+Batches:  39%|███▉      | 23/59 [00:02&lt;00:03, 11.95it/s]
+Batches:  42%|████▏     | 25/59 [00:02&lt;00:02, 11.79it/s]
+Batches:  46%|████▌     | 27/59 [00:02&lt;00:02, 11.98it/s]
+Batches:  49%|████▉     | 29/59 [00:02&lt;00:02, 11.52it/s]
+Batches:  53%|█████▎    | 31/59 [00:02&lt;00:02, 11.01it/s]
+Batches:  56%|█████▌    | 33/59 [00:03&lt;00:02, 11.36it/s]
+Batches:  59%|█████▉    | 35/59 [00:03&lt;00:02, 11.68it/s]
+Batches:  63%|██████▎   | 37/59 [00:03&lt;00:01, 11.92it/s]
+Batches:  66%|██████▌   | 39/59 [00:03&lt;00:01, 11.72it/s]
+Batches:  69%|██████▉   | 41/59 [00:03&lt;00:01, 11.69it/s]
+Batches:  73%|███████▎  | 43/59 [00:03&lt;00:01, 11.92it/s]
+Batches:  76%|███████▋  | 45/59 [00:04&lt;00:01, 12.07it/s]
+Batches:  80%|███████▉  | 47/59 [00:04&lt;00:01, 11.83it/s]
+Batches:  83%|████████▎ | 49/59 [00:04&lt;00:00, 13.20it/s]
+Batches:  86%|████████▋ | 51/59 [00:04&lt;00:00, 14.56it/s]
+Batches:  90%|████████▉ | 53/59 [00:04&lt;00:00, 15.48it/s]
+Batches:  95%|█████████▍| 56/59 [00:04&lt;00:00, 17.26it/s]
+Batches: 100%|██████████| 59/59 [00:04&lt;00:00, 19.67it/s]
+Batches: 100%|██████████| 59/59 [00:04&lt;00:00, 12.36it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Generated embeddings with shape: (1892, 384)
-Adding 1892 documents to vector store ...
-successfully added 1892 documents to vector store
-Total documents in collection: 1892</code></pre>
+<pre><code>Generated embeddings with shape: (1882, 384)
+Adding 1882 documents to vector store ...
+successfully added 1882 documents to vector store
+Total documents in collection: 1882</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -1573,14 +1544,14 @@ UserQuery --&gt; MainSource : embed the query
 <span id="cb35-76"><a href="#cb35-76" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-77"><a href="#cb35-77" aria-hidden="true" tabindex="-1"></a>rag_retriever</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="handles-the-query-based-retrieval-from-the-vector-store" class="cell-output cell-output-display" data-execution_count="14">
-<pre><code>&lt;__main__.RAGRetriever at 0x32200f890&gt;</code></pre>
+<pre><code>&lt;__main__.RAGRetriever at 0x30682c560&gt;</code></pre>
 </div>
 <p>:::</p>
 <p>::: {#cell-asking specific query .cell execution_count=15}</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>rag_retriever.retrieve(<span class="st">"The Los Altos house"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>14:22:58 - __main__ - INFO - Retrieving documents for query: 'The Los Altos house'
-14:22:58 - __main__ - INFO - Top K: 5, Score threshold: 0.0</code></pre>
+<pre><code>14:46:12 - __main__ - INFO - Retrieving documents for query: 'The Los Altos house'
+14:46:12 - __main__ - INFO - Top K: 5, Score threshold: 0.0</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generating embeddings for 1 texts...</code></pre>
@@ -1588,7 +1559,7 @@ UserQuery --&gt; MainSource : embed the query
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Batches:   0%|          | 0/1 [00:00&lt;?, ?it/s]
-Batches: 100%|██████████| 1/1 [00:00&lt;00:00, 11.90it/s]</code></pre>
+Batches: 100%|██████████| 1/1 [00:00&lt;00:00, 15.53it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generated embeddings with shape: (1, 384)
@@ -1598,27 +1569,27 @@ Retrieved 1 documents (after filtering)</code></pre>
 <pre><code></code></pre>
 </div>
 <div id="asking-specific-query" class="cell-output cell-output-display" data-execution_count="15">
-<pre><code>[{'id': 'doc_ecc14777_39',
+<pre><code>[{'id': 'doc_2e8a0206_39',
   'content': 'The Los Altos house with the garage where Apple was born',
-  'metadata': {'doc_index': 39,
-   'content_hash': '58eedc81ef3b5cfe9b69fb27dd943a45',
-   'subject': '',
-   'trapped': '',
-   'page': 27,
-   'author': 'Isaacson, Walter',
-   'content_length': 56,
-   'moddate': '',
+  'metadata': {'total_pages': 622,
    'creationdate': '2020-01-29T03:08:19+00:00',
-   'format': 'PDF 1.4',
-   'total_pages': 622,
-   'creationDate': "D:20200129030819+00'00'",
-   'title': 'Steve Jobs',
-   'keywords': '',
-   'modDate': '',
-   'file_path': 'data/pdf/SteveJobs.pdf',
    'creator': 'calibre 3.48.0 [https://calibre-ebook.com]',
+   'keywords': '',
+   'subject': '',
+   'creationDate': "D:20200129030819+00'00'",
+   'file_path': 'data/pdf/SteveJobs.pdf',
+   'trapped': '',
+   'title': 'Steve Jobs',
+   'doc_index': 39,
+   'author': 'Isaacson, Walter',
+   'modDate': '',
+   'content_length': 56,
+   'source': 'SteveJobs.pdf',
+   'moddate': '',
    'producer': 'calibre 3.48.0 [https://calibre-ebook.com]',
-   'source': 'SteveJobs.pdf'},
+   'page': 27,
+   'content_hash': '58eedc81ef3b5cfe9b69fb27dd943a45',
+   'format': 'PDF 1.4'},
   'similarity_score': 0.35509663820266724,
   'distance': 0.6449033617973328,
   'rank': 1}]</code></pre>
@@ -1637,34 +1608,35 @@ Retrieved 1 documents (after filtering)</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> langchain_groq <span class="im">import</span> ChatGroq</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>load_dotenv()</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co">### initialize the groq llm </span></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>groq_api_key <span class="op">=</span> <span class="st">"[REMOVED]"</span></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>llm <span class="op">=</span> ChatGroq(groq_api_key<span class="op">=</span>groq_api_key, model_name<span class="op">=</span><span class="st">"groq/compound-mini"</span>, temperature<span class="op">=</span><span class="fl">0.1</span>, max_tokens<span class="op">=</span><span class="dv">1024</span>)</span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="co"># simple RAG function: retrieve the context + generate reponses</span></span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rag_simple(query, retriever, llm, top_k<span class="op">=</span><span class="dv">3</span>):</span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># retrieve the relevant document</span></span>
-<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>    results<span class="op">=</span>retriever.retrieve(query, top_k<span class="op">=</span>top_k)</span>
-<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>    context<span class="op">=</span><span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>.join([doc[<span class="st">'content'</span>] <span class="cf">for</span> doc <span class="kw">in</span> results]) <span class="cf">if</span> results <span class="cf">else</span> <span class="st">""</span></span>
-<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> context:</span>
-<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"No relevant context found to answer the question"</span></span>
-<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">## generate the answer using Groq LLM</span></span>
-<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a>    prompt<span class="op">=</span><span class="ss">f"""Use the following context to answer the question precisely</span></span>
-<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a><span class="ss">        Context:</span></span>
-<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a><span class="ss">        </span><span class="sc">{</span>context<span class="sc">}</span></span>
-<span id="cb44-25"><a href="#cb44-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-26"><a href="#cb44-26" aria-hidden="true" tabindex="-1"></a><span class="ss">        Question: </span><span class="sc">{</span>query<span class="sc">}</span></span>
-<span id="cb44-27"><a href="#cb44-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-28"><a href="#cb44-28" aria-hidden="true" tabindex="-1"></a><span class="ss">        Answer:"""</span></span>
-<span id="cb44-29"><a href="#cb44-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-30"><a href="#cb44-30" aria-hidden="true" tabindex="-1"></a>    response<span class="op">=</span>llm.invoke([prompt.<span class="bu">format</span>(context<span class="op">=</span>context, query<span class="op">=</span>query)])</span>
-<span id="cb44-31"><a href="#cb44-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> response.content</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>load_dotenv()</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co">### initialize the groq llm </span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>groq_api_key <span class="op">=</span> os.getenv(<span class="st">"GROG_API_KEY"</span>)</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>llm <span class="op">=</span> ChatGroq(groq_api_key<span class="op">=</span>groq_api_key, model_name<span class="op">=</span><span class="st">"groq/compound-mini"</span>, temperature<span class="op">=</span><span class="fl">0.1</span>, max_tokens<span class="op">=</span><span class="dv">1024</span>)</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a><span class="co"># simple RAG function: retrieve the context + generate reponses</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rag_simple(query, retriever, llm, top_k<span class="op">=</span><span class="dv">3</span>):</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># retrieve the relevant document</span></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>    results<span class="op">=</span>retriever.retrieve(query, top_k<span class="op">=</span>top_k)</span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>    context<span class="op">=</span><span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>.join([doc[<span class="st">'content'</span>] <span class="cf">for</span> doc <span class="kw">in</span> results]) <span class="cf">if</span> results <span class="cf">else</span> <span class="st">""</span></span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> context:</span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"No relevant context found to answer the question"</span></span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">## generate the answer using Groq LLM</span></span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a>    prompt<span class="op">=</span><span class="ss">f"""Use the following context to answer the question precisely</span></span>
+<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a><span class="ss">        Context:</span></span>
+<span id="cb44-25"><a href="#cb44-25" aria-hidden="true" tabindex="-1"></a><span class="ss">        </span><span class="sc">{</span>context<span class="sc">}</span></span>
+<span id="cb44-26"><a href="#cb44-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-27"><a href="#cb44-27" aria-hidden="true" tabindex="-1"></a><span class="ss">        Question: </span><span class="sc">{</span>query<span class="sc">}</span></span>
+<span id="cb44-28"><a href="#cb44-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-29"><a href="#cb44-29" aria-hidden="true" tabindex="-1"></a><span class="ss">        Answer:"""</span></span>
+<span id="cb44-30"><a href="#cb44-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-31"><a href="#cb44-31" aria-hidden="true" tabindex="-1"></a>    response<span class="op">=</span>llm.invoke([prompt.<span class="bu">format</span>(context<span class="op">=</span>context, query<span class="op">=</span>query)])</span>
+<span id="cb44-32"><a href="#cb44-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> response.content</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="enhanced-rag-pipelines-features" class="level1">
@@ -1673,8 +1645,8 @@ Retrieved 1 documents (after filtering)</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>answer <span class="op">=</span> rag_simple(<span class="st">"The Lost Altos House ? "</span>, rag_retriever, llm)</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(answer)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>14:22:58 - __main__ - INFO - Retrieving documents for query: 'The Lost Altos House ? '
-14:22:58 - __main__ - INFO - Top K: 3, Score threshold: 0.0</code></pre>
+<pre><code>14:46:12 - __main__ - INFO - Retrieving documents for query: 'The Lost Altos House ? '
+14:46:12 - __main__ - INFO - Top K: 3, Score threshold: 0.0</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generating embeddings for 1 texts...</code></pre>
@@ -1682,17 +1654,17 @@ Retrieved 1 documents (after filtering)</code></pre>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Batches:   0%|          | 0/1 [00:00&lt;?, ?it/s]
-Batches: 100%|██████████| 1/1 [00:00&lt;00:00, 34.84it/s]</code></pre>
+Batches: 100%|██████████| 1/1 [00:00&lt;00:00, 45.66it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generated embeddings with shape: (1, 384)
 Retrieved 1 documents (after filtering)</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>14:22:59 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"</code></pre>
+<pre><code>14:46:13 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>The “Los Altos House” refers to the home in Los Altos, California, whose garage is famous for being the place where Apple was founded. It’s the house with the garage where Apple was born.</code></pre>
+<pre><code>The “Lost Altos House” refers to the **Los Altos house** – the garage in Los Altos, California, where Apple was founded.</code></pre>
 </div>
 </div>
 <div id="enhanced-version-of-rag-pipeline" class="cell" data-execution_count="18">
@@ -1740,8 +1712,8 @@ Retrieved 1 documents (after filtering)</code></pre>
 <span id="cb52-42"><a href="#cb52-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"confidence:"</span>, result[<span class="st">'confidence'</span>])</span>
 <span id="cb52-43"><a href="#cb52-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Context Preview:"</span>, result[<span class="st">'context'</span>][:<span class="dv">300</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>14:22:59 - __main__ - INFO - Retrieving documents for query: 'The Lost Altos House ?'
-14:22:59 - __main__ - INFO - Top K: 3, Score threshold: 0.1</code></pre>
+<pre><code>14:46:13 - __main__ - INFO - Retrieving documents for query: 'The Lost Altos House ?'
+14:46:13 - __main__ - INFO - Top K: 3, Score threshold: 0.1</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generating embeddings for 1 texts...</code></pre>
@@ -1749,17 +1721,17 @@ Retrieved 1 documents (after filtering)</code></pre>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Batches:   0%|          | 0/1 [00:00&lt;?, ?it/s]
-Batches: 100%|██████████| 1/1 [00:00&lt;00:00, 22.62it/s]</code></pre>
+Batches: 100%|██████████| 1/1 [00:00&lt;00:00, 91.19it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generated embeddings with shape: (1, 384)
 Retrieved 1 documents (after filtering)</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>14:23:00 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"</code></pre>
+<pre><code>14:46:15 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Answer: The Los Altos house – the home in Los Altos, California, whose garage is where Apple was founded.
+<pre><code>Answer: The “Los Altos house” refers to the home at 2066 Crist Drive in Los Altos, California—the garage where Steve Jobs, Steve Wozniak and Ronald Wayne founded Apple.
 Sources: [{'source': 'SteveJobs.pdf', 'page': 27, 'score': 0.11650347709655762, 'preview': 'The Los Altos house with the garage where Apple was born....'}]
 confidence: 0.11650347709655762
 Context Preview: The Los Altos house with the garage where Apple was born</code></pre>
