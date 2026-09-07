@@ -649,6 +649,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# how to do it
+
 ### initialize the groq llm 
 groq_api_key = os.getenv("GROG_API_KEY")
 
