@@ -24,3 +24,6 @@
 - **Status**: ✅ Retrieval working
 - **Next**: Add LLM for answer generation
 - **Reference**: Steve Jobs biography PDFs
+
+## SIMPLE SNAPSHOT
+![Starting Point](images/first.png)
