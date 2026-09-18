@@ -27,3 +27,12 @@
 
 ## SIMPLE SNAPSHOT
 ![Starting Point](images/first.png)
+
+
+![Second Point](images/second.png)
+
+
+![Starting Point](images/third.png)
+
+
+![Starting Point](images/fourth.png)
